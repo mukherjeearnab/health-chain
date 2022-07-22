@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+    l1-api:
+        build: ./l1-data-layer
+        ports:
+            - "3000:3000"
+        links:
+            - l1-mongo
+    l1-mongo:
+        image: mongo
+        ports:
+            - "27017:27017"

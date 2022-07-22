@@ -1,7 +1,7 @@
 const express = require("express");
 const DB = require("../helpers/db");
 
-const SchemaName = "personalHealthIdentifier";
+const SchemaName = "phi";
 
 const router = new express.Router();
 
@@ -12,7 +12,7 @@ router.post("/create", async (req, res) => {
 
     try {
         const reply = await DB.Create(object, SchemaName);
-        if (!reply) {
+        if (reply) {
             res.status(201).send(reply);
         } else {
             throw new Error("Database Error!");
@@ -30,7 +30,7 @@ router.get("/get/:id", async (req, res) => {
 
     try {
         const reply = await DB.Read({ AadhaarID }, SchemaName);
-        if (!reply) {
+        if (reply) {
             res.status(200).send(reply[0]);
         } else {
             throw new Error("Database Error!");
@@ -48,7 +48,7 @@ router.post("/query", async (req, res) => {
 
     try {
         const reply = await DB.Read(query, SchemaName);
-        if (!reply) {
+        if (reply) {
             res.status(200).send(reply);
         } else {
             throw new Error("Database Error!");
@@ -68,7 +68,7 @@ router.post("/udpate/:id", async (req, res) => {
 
     try {
         const reply = await DB.Update(_id, object, SchemaName);
-        if (!reply) {
+        if (reply) {
             res.status(200).send(reply);
         } else {
             throw new Error("Database Error!");
@@ -86,7 +86,7 @@ router.delete("/delete/:id", async (req, res) => {
 
     try {
         const reply = await DB.Delete(_id, SchemaName);
-        if (!reply) {
+        if (reply) {
             res.status(204).send(reply);
         } else {
             throw new Error("Database Error!");
