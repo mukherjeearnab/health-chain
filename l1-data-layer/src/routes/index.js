@@ -8,7 +8,8 @@ const routes = (app) => {
      */
     fs.readdirSync(`${path.resolve()}/src/routes/`).forEach((file) => {
         console.log(file);
-        if (file.match(/\.js$/) !== null && file !== "index.js") app.use(require(`./${file.replace(".js", "")}`));
+        if (file.match(/\.js$/) !== null && file !== "index.js")
+            app.use(`/${file.replace(".js", "")}`, require(`./${file.replace(".js", "")}`));
     });
 };
 
