@@ -1,5 +1,6 @@
 module.exports = {
     AadhaarID: String,
+    Name: String,
     DoB: Number,
     Gender: Number,
     Father: String,
