@@ -8,6 +8,6 @@ services:
         links:
             - l1-mongo
     l1-mongo:
-        image: mongo
+        image: mongo:5.0.9
         ports:
             - "27017:27017"

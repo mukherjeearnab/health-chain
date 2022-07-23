@@ -4,7 +4,7 @@ module.exports = async (query, schemaName) => {
         const Schema = require(`../../models/${schemaName}`);
 
         // Query the database to find objects with the given query
-        const doc = await Schema.findMany(query);
+        const doc = await Schema.find(query);
 
         console.log(`Found ${doc.length} documents with query ${query} in schema: ${schemaName}.`);
 

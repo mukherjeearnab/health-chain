@@ -8,7 +8,7 @@ const router = new express.Router();
 // create a new record object
 router.post("/create", async (req, res) => {
     // obtain the record object fro the body of the request
-    const object = req.body.object;
+    const object = req.body;
 
     try {
         const reply = await DB.Create(object, SchemaName);
@@ -44,7 +44,7 @@ router.get("/get/:id", async (req, res) => {
 // fetch records from the database matching query
 router.post("/query", async (req, res) => {
     // obtain the query object from the body of the request
-    const query = req.body.query;
+    const query = req.body;
 
     try {
         const reply = await DB.Read(query, SchemaName);
@@ -60,11 +60,11 @@ router.post("/query", async (req, res) => {
 });
 
 // update a record with _id matching
-router.post("/udpate/:id", async (req, res) => {
+router.post("/update/:id", async (req, res) => {
     // obtain the id of the record to update
     const _id = req.params.id;
     // obtain the updated object from the body of the request
-    const object = req.body.object;
+    const object = req.body;
 
     try {
         const reply = await DB.Update(_id, object, SchemaName);
