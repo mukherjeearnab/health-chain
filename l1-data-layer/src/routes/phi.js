@@ -12,6 +12,7 @@ router.post("/create", async (req, res) => {
 
     try {
         const reply = await DB.Create(object, SchemaName);
+        await DB.Create({ AadhaarID: object.AadhaarID }, "consent");
         if (reply) {
             res.status(201).send(reply);
         } else {
