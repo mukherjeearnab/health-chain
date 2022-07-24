@@ -2,7 +2,7 @@ version: "3"
 
 services:
     l1-api:
-        build: ./l1-data-layer
+        build: ./
         ports:
             - "3000:3000"
         links:
