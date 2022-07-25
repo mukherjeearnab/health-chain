@@ -5,7 +5,7 @@ const NewRequest = require("./new-request");
 const Revoke = require("./revoke");
 const RevokeRequest = require("./revoke-request");
 
-modules.export = {
+module.exports = {
     Get,
     Allow,
     AllowRequest,

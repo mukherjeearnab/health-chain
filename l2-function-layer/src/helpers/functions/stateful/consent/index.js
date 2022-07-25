@@ -3,4 +3,4 @@ const Check = require("./check");
 const Request = require("./request");
 const Revoke = require("./revoke");
 
-modules.export = { Allow, Check, Request, Revoke };
+module.exports = { Allow, Check, Request, Revoke };

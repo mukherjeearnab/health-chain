@@ -1,6 +1,6 @@
-const DB = require("../../data");
+const DB = require("../../../data");
 
-modules.export = async (Account, Candidate) => {
+module.exports = async (Account, Candidate) => {
     // fetch consent record
     const document = await DB.Consent.Get(Account);
 

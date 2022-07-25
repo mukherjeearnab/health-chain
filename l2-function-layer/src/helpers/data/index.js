@@ -2,7 +2,7 @@ const Consent = require("./consent");
 const PHI = require("./phi");
 const PHR = require("./phr");
 
-modules.export = {
+module.exports = {
     Consent,
     PHI,
     PHR,
