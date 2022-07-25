@@ -138,4 +138,34 @@ router.post("/allow-request/:id", async (req, res) => {
     }
 });
 
+// revoke consent for given requester from list of consent requests
+router.post("/revoke-request/:id", async (req, res) => {
+    // obtain the ID of the PHI
+    const AadhaarID = req.params.id;
+
+    // obtain the Requester and Action from the body of the request
+    const { RequesterIndex } = req.body;
+
+    try {
+        // obtain the PHI of the record to add concent to
+        const document = (await DB.Read({ AadhaarID }, SchemaName))[0];
+        // Add the Requester's ID and set the Action (True = Consent Granted, False = Revoked)
+        document.Consent.set(document.ConsentRequests[RequesterIndex].Requester, false);
+        // set request to allowed, recording the timestamp
+        document.ConsentRequests[RequesterIndex].status.allowed = false;
+        document.ConsentRequests[RequesterIndex].status.timestamp = +new Date();
+        // Update Consent
+        const reply = await DB.Update(document._id, document, SchemaName);
+
+        if (reply) {
+            res.status(204).send(reply);
+        } else {
+            throw new Error("Database Error!");
+        }
+    } catch (err) {
+        console.error("SERVER ERROR", err.message);
+        res.status(500).send({ message: "Server Error!" });
+    }
+});
+
 module.exports = router;
