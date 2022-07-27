@@ -2,7 +2,7 @@ module.exports = {
     AadhaarID: String,
     Consent: {
         type: Map,
-        of: String,
+        of: Boolean,
         default: {},
     },
     ConsentRequests: [
