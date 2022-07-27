@@ -12,5 +12,5 @@ module.exports = async (AadhaarID, Candidate, Message) => {
         },
     });
 
-    return await res.json();
+    return await res.status;
 };

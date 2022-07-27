@@ -12,7 +12,7 @@ router.post("/allow/:id", async (req, res) => {
     const { Candidate } = req.body;
 
     try {
-        const reply = Functions.Stateful.Consent.Allow(AadhaarID, Candidate);
+        const reply = await Functions.Stateful.Consent.Allow(AadhaarID, Candidate);
         res.status(204).send(reply);
     } catch (err) {
         console.error("SERVER ERROR", err.message);
@@ -29,7 +29,7 @@ router.post("/revoke/:id", async (req, res) => {
     const { Candidate } = req.body;
 
     try {
-        const reply = Functions.Stateful.Consent.Revoke(AadhaarID, Candidate);
+        const reply = await Functions.Stateful.Consent.Revoke(AadhaarID, Candidate);
         res.status(204).send(reply);
     } catch (err) {
         console.error("SERVER ERROR", err.message);
@@ -46,7 +46,7 @@ router.post("/check/:id", async (req, res) => {
     const { Candidate } = req.body;
 
     try {
-        const reply = Functions.Stateful.Consent.Check(AadhaarID, Candidate);
+        const reply = await Functions.Stateful.Consent.Check(AadhaarID, Candidate);
         res.status(201).send({ concentGranted: reply });
     } catch (err) {
         console.error("SERVER ERROR", err.message);
@@ -63,7 +63,7 @@ router.post("/request/:id", async (req, res) => {
     const { Candidate, Message } = req.body;
 
     try {
-        const reply = Functions.Stateful.Consent.Request(AadhaarID, Candidate, Message);
+        const reply = await Functions.Stateful.Consent.Request(AadhaarID, Candidate, Message);
         res.status(204).send(reply);
     } catch (err) {
         console.error("SERVER ERROR", err.message);

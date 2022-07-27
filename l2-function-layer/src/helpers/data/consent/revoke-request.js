@@ -11,5 +11,5 @@ module.exports = async (AadhaarID, RequesterIndex) => {
         },
     });
 
-    return await res.json();
+    return await res.status;
 };
