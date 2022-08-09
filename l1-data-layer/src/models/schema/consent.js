@@ -3,7 +3,7 @@ module.exports = {
     Consent: {
         type: Map,
         of: Boolean,
-        default: {},
+        default: {}
     },
     ConsentRequests: [
         {
@@ -12,8 +12,8 @@ module.exports = {
             message: String,
             status: {
                 allowed: Boolean,
-                timestamp: Number,
-            },
-        },
-    ],
+                timestamp: Number
+            }
+        }
+    ]
 };

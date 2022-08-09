@@ -1,6 +1,7 @@
 module.exports = async (object, schemaName) => {
     try {
         // Load the schema
+        // eslint-disable-next-line import/no-dynamic-require, global-require
         const Schema = require(`../../models/${schemaName}`);
 
         // Create the schema object into the database
@@ -10,7 +11,7 @@ module.exports = async (object, schemaName) => {
 
         return doc;
     } catch (err) {
-        console.error("Error creating document!", err);
+        console.error('Error creating document!', err);
         return undefined;
     }
 };

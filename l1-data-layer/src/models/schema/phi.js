@@ -7,5 +7,5 @@ module.exports = {
     Mother: String,
     Phone: Number,
     Address: String,
-    Pincode: Number,
+    Pincode: Number
 };

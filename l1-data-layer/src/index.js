@@ -1,12 +1,12 @@
 // import packages
-const express = require("express");
+const express = require('express');
 // const cors = require("cors");
 
 // initialize express app
 const app = express();
 
 // configure dotenv
-require("dotenv").config();
+require('dotenv').config();
 
 // JSON Middleware
 app.use(express.json());
@@ -21,7 +21,7 @@ app.use(express.json());
 // });
 
 // Load API Routes
-require("./routes")(app);
+require('./routes')(app);
 
 // Start Listening
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}.`));
