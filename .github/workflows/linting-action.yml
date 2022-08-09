@@ -12,7 +12,7 @@ on:
 
 jobs:
     lint-l1:
-        name: Run linters
+        name: Run ESLint on L1 Data Layer
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -35,7 +35,7 @@ jobs:
               run: npx eslint . --ext .js,.jsx
 
     lint-l2:
-        name: Run linters
+        name: Run ESLint on L2 Function Layer
         runs-on: ubuntu-latest
         defaults:
             run:
