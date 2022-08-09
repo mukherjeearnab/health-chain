@@ -1,16 +1,16 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
 module.exports = async (AadhaarID, Candidate, Message) => {
     const res = await fetch(`http://${process.env.L1_API}/consent/new-request/${AadhaarID}`, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({
             Candidate,
-            Message,
+            Message
         }),
         headers: {
-            "Content-Type": "application/json",
-        },
+            'Content-Type': 'application/json'
+        }
     });
 
-    return await res.status;
+    return res.status;
 };

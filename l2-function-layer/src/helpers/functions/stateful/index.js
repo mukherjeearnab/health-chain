@@ -1,3 +1,3 @@
-const Consent = require("./consent");
+const Consent = require('./consent');
 
 module.exports = { Consent };

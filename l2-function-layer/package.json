@@ -1,7 +1,7 @@
 {
-  "name": "l1-data-layer",
+  "name": "l2-function-layer",
   "version": "1.0.0",
-  "description": "NDHM Data Layer Prototype",
+  "description": "NDHM Function Layer Prototype",
   "main": "index.js",
   "scripts": {
     "start": "node ./src",
@@ -13,5 +13,13 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "2.7.1"
   }
 }

@@ -1,16 +1,19 @@
 module.exports = (object) => {
     // Delete all properties cointaining personally identifiable information
     // Properties of PHI
-    delete object.AadhaarID;
-    delete object.Name;
-    delete object.Father;
-    delete object.Mother;
-    delete object.Phone;
-    delete object.Address;
-    delete object.Pincode;
+
+    const anon = object;
+
+    delete anon.AadhaarID;
+    delete anon.Name;
+    delete anon.Father;
+    delete anon.Mother;
+    delete anon.Phone;
+    delete anon.Address;
+    delete anon.Pincode;
 
     // TODO: Add Properties of PHR
 
     // return anonymized object
-    return object;
+    return anon;
 };

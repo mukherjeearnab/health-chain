@@ -1,3 +1,3 @@
-const Anonymizer = require("./anonymizer");
+const Anonymizer = require('./anonymizer');
 
 module.exports = { Anonymizer };

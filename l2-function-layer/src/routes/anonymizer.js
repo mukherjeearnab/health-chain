@@ -1,10 +1,10 @@
-const express = require("express");
-const Functions = require("../helpers/functions");
+const express = require('express');
+const Functions = require('../helpers/functions');
 
 const router = new express.Router();
 
 // anonymizer route
-router.post("/anonymize", async (req, res) => {
+router.post('/anonymize', async (req, res) => {
     // obtain the record object fro the body of the request
     const object = req.body;
 
@@ -20,8 +20,8 @@ router.post("/anonymize", async (req, res) => {
         // send the response with anonmyzed object
         res.status(201).send(reply);
     } catch (err) {
-        console.error("SERVER ERROR", err.message);
-        res.status(500).send({ message: "Server Error!" });
+        console.error('SERVER ERROR', err.message);
+        res.status(500).send({ message: 'Server Error!' });
     }
 });
 

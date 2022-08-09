@@ -1,4 +1,4 @@
-const DB = require("../../../data");
+const DB = require('../../../data');
 
 module.exports = async (Account, Candidate, Message) => {
     // fetch consent record

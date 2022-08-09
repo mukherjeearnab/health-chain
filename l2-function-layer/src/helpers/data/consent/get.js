@@ -1,12 +1,12 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
 module.exports = async (AadhaarID) => {
     const res = await fetch(`http://${process.env.L1_API}/consent/get/${AadhaarID}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json",
-        },
+            'Content-Type': 'application/json'
+        }
     });
 
-    return await res.json();
+    return res.json();
 };
