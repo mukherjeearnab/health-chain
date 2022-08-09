@@ -16,7 +16,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: l1-data-layer
+                working-directory: local/l1-data-layer
 
         steps:
             - name: Check out Git repository
@@ -39,7 +39,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: l2-function-layer
+                working-directory: local/l2-function-layer
 
         steps:
             - name: Check out Git repository
