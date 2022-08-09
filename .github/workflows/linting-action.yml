@@ -32,10 +32,8 @@ jobs:
               run: npm ci
 
             - name: Run linters
-              uses: wearerequired/lint-action@v2
-              with:
-                  eslint: true
-                  prettier: true
+              run: npx eslint . --ext .ts,.tsx
+
     lint-l2:
         name: Run linters
         runs-on: ubuntu-latest
@@ -57,7 +55,4 @@ jobs:
               run: npm ci
 
             - name: Run linters
-              uses: wearerequired/lint-action@v2
-              with:
-                  eslint: true
-                  prettier: true
+              run: npx eslint . --ext .js,.jsx
