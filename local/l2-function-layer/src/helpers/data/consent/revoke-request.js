@@ -1,15 +1,10 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 module.exports = async (AadhaarID, RequesterIndex) => {
-    const res = await fetch(`http://${process.env.L1_API}/consent/revoke-request/${AadhaarID}`, {
-        method: 'POST',
-        body: JSON.stringify({
-            RequesterIndex
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    const res = await axios.post(
+        `http://${process.env.L1_API}/consent/revoke-request/${AadhaarID}`,
+        { RequesterIndex }
+    );
 
     return res.status;
 };
