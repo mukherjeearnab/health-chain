@@ -11,8 +11,8 @@ on:
             - main
 
 jobs:
-    lint-l1:
-        name: Run ESLint on L1 Data Layer
+    local-lint-l1:
+        name: Run [LOCAL] ESLint on L1 Data Layer
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -34,12 +34,58 @@ jobs:
             - name: Run linters
               run: npx eslint . --ext .js,.jsx
 
-    lint-l2:
-        name: Run ESLint on L2 Function Layer
+    local-lint-l2:
+        name: Run [LOCAL] ESLint on L2 Function Layer
         runs-on: ubuntu-latest
         defaults:
             run:
                 working-directory: local/l2-function-layer
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16.16.0
+
+            # ESLint and Prettier must be in `package.json`
+            - name: Install Node.js dependencies
+              run: npm ci
+
+            - name: Run linters
+              run: npx eslint . --ext .js,.jsx
+
+    state-lint-l1:
+        name: Run [STATE] ESLint on L1 Data Layer
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: state/l1-data-layer
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16.16.0
+
+            # ESLint and Prettier must be in `package.json`
+            - name: Install Node.js dependencies
+              run: npm ci
+
+            - name: Run linters
+              run: npx eslint . --ext .js,.jsx
+
+    state-lint-l2:
+        name: Run [STATE] ESLint on L2 Function Layer
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: state/l2-function-layer
 
         steps:
             - name: Check out Git repository
