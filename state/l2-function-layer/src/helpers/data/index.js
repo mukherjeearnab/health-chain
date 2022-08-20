@@ -1,9 +1,5 @@
-const Consent = require('./consent');
-const PHI = require('./phi');
-const PHR = require('./phr');
+const HIE = require('./hie');
 
 module.exports = {
-    Consent,
-    PHI,
-    PHR
+    HIE
 };
