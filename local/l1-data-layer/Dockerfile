@@ -6,10 +6,9 @@ WORKDIR /app
 
 COPY package.json /app
 
-# if local npm registry cache is used (set the registry url properly)
-# RUN npm set registry http://172.17.0.1:4873/
+COPY package-lock.json /app
 
-RUN npm install
+RUN npm ci
 
 COPY . /app
 
