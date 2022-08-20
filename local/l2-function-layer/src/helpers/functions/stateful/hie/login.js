@@ -8,7 +8,7 @@ module.exports = async (username, passhash, group) => {
     const document = await DB.HIE.GetAccount(username);
 
     // if document contains message, i.e. error, return error
-    if (document.message) return { status: 404, data: undefined };
+    if (document.message || document.username !== username) return { status: 404, data: undefined };
 
     // if password hash supplied is correct, generate token and authenticate user
     if (document.passhash === passhash) {
