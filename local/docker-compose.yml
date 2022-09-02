@@ -4,17 +4,17 @@ services:
     # Layer 1 - Data Services
     l1-api:
         build: ./l1-data-layer
-        ports:
-            - "3000:3000"
-        links:
-            - l1-mongo
+        # ports:
+        #     - "3000:3000"
+        # links:
+        #     - l1-mongo
     l1-mongo:
         image: mongo:5.0.9
-        ports:
-            - "27017:27017"
+        # ports:
+        #     - "27017:27017"
 
     # Layer 2 - Functional Services
     l2-api:
         build: ./l2-function-layer
-        ports:
-            - "3001:3000"
+        # ports:
+        #     - "3001:3000"
