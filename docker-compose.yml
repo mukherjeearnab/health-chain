@@ -9,48 +9,29 @@ version: "3"
 # Example: 12120 = 'DB' of 'Layer 2' of 'ID 1' at 'State Level', 'Healthchain'
 
 services:
-    mongo.l1.id1.local.healthchain.com:
+    # National Level Services
+    mongo.l1.id1.national.healthchain.com:
         image: mongo:5.0.9
         ports:
-            - "11110:27017"
+            - "13110:27017"
 
-    api.l1.id1.local.healthchain.com:
+    api.l1.id1.national.healthchain.com:
         extends:
-            file: ./local/docker-compose.yml
+            file: ./state/docker-compose.yml
             service: l1-api
         ports:
-            - "11111:3000"
+            - "13111:3000"
         links:
-            - mongo.l1.id1.local.healthchain.com
+            - mongo.l1.id1.state.healthchain.com
 
-    api.l2.id1.local.healthchain.com:
+    api.l2.id1.national.healthchain.com:
         extends:
-            file: ./local/docker-compose.yml
+            file: ./national/docker-compose.yml
             service: l2-api
         ports:
-            - "11121:3000"
+            - "13121:3000"
 
-    mongo.l1.id2.local.healthchain.com:
-        image: mongo:5.0.9
-        ports:
-            - "11210:27017"
-
-    api.l1.id2.local.healthchain.com:
-        extends:
-            file: ./local/docker-compose.yml
-            service: l1-api
-        ports:
-            - "11211:3000"
-        links:
-            - mongo.l1.id2.local.healthchain.com
-
-    api.l2.id2.local.healthchain.com:
-        extends:
-            file: ./local/docker-compose.yml
-            service: l2-api
-        ports:
-            - "11221:3000"
-
+    # State Level Services for State-1
     mongo.l1.id1.state.healthchain.com:
         image: mongo:5.0.9
         ports:
@@ -72,23 +53,47 @@ services:
         ports:
             - "12121:3000"
 
-    mongo.l1.id1.national.healthchain.com:
+    # Local Level Services for State-1
+    ## Local Service 1 (State-1)
+    mongo.l1.id1.local.healthchain.com:
         image: mongo:5.0.9
         ports:
-            - "13110:27017"
+            - "11110:27017"
 
-    api.l1.id1.national.healthchain.com:
+    api.l1.id1.local.healthchain.com:
         extends:
-            file: ./state/docker-compose.yml
+            file: ./local/docker-compose.yml
             service: l1-api
         ports:
-            - "13111:3000"
+            - "11111:3000"
         links:
-            - mongo.l1.id1.state.healthchain.com
+            - mongo.l1.id1.local.healthchain.com
 
-    api.l2.id1.national.healthchain.com:
+    api.l2.id1.local.healthchain.com:
         extends:
-            file: ./national/docker-compose.yml
+            file: ./local/docker-compose.yml
             service: l2-api
         ports:
-            - "13121:3000"
+            - "11121:3000"
+
+    ## Local Service 2 (State-1)
+    mongo.l1.id2.local.healthchain.com:
+        image: mongo:5.0.9
+        ports:
+            - "11210:27017"
+
+    api.l1.id2.local.healthchain.com:
+        extends:
+            file: ./local/docker-compose.yml
+            service: l1-api
+        ports:
+            - "11211:3000"
+        links:
+            - mongo.l1.id2.local.healthchain.com
+
+    api.l2.id2.local.healthchain.com:
+        extends:
+            file: ./local/docker-compose.yml
+            service: l2-api
+        ports:
+            - "11221:3000"
