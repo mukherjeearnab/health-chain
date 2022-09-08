@@ -1,5 +1,8 @@
 version: "3"
 
+networks:
+    healthnet:
+
 ## PORT allocation scheme:
 # 1th digit: Service type: (0 = db, 1 = api)
 # 2nd digit: Layer number (1 = l1, 2 = l2)
@@ -10,75 +13,107 @@ version: "3"
 
 services:
     # National Level Services
-    mongo.l1.id1.national.healthchain.com:
+    db.l1.id1.national.healthchain.com:
         image: mongo:5.0.9
-        ports:
-            - "13110:27017"
+        networks:
+            - healthnet
+        expose:
+            - "27017"
 
     api.l1.id1.national.healthchain.com:
         extends:
-            file: ./state/docker-compose.yml
+            file: ./national/docker-compose.yml
             service: l1-api
+        networks:
+            - healthnet
         ports:
             - "13111:3000"
         links:
-            - mongo.l1.id1.state.healthchain.com
+            - db.l1.id1.national.healthchain.com
+        environment:
+            - MONGODB_URI=db.l1.id1.national.healthchain.com:27017
 
     api.l2.id1.national.healthchain.com:
         extends:
             file: ./national/docker-compose.yml
             service: l2-api
+        networks:
+            - healthnet
         ports:
             - "13121:3000"
+        environment:
+            - L1_API=api.l1.id1.national.healthchain.com:13111
 
     # State Level Services for State-1
-    mongo.l1.id1.state.healthchain.com:
+    db.l1.id1.state.healthchain.com:
         image: mongo:5.0.9
-        ports:
-            - "12110:27017"
+        networks:
+            - healthnet
+        expose:
+            - "27017"
 
     api.l1.id1.state.healthchain.com:
         extends:
             file: ./state/docker-compose.yml
             service: l1-api
+        networks:
+            - healthnet
         ports:
             - "12111:3000"
         links:
-            - mongo.l1.id1.state.healthchain.com
+            - db.l1.id1.state.healthchain.com
+        environment:
+            - MONGODB_URI=db.l1.id1.state.healthchain.com:27017
 
     api.l2.id1.state.healthchain.com:
         extends:
             file: ./state/docker-compose.yml
             service: l2-api
+        networks:
+            - healthnet
         ports:
             - "12121:3000"
+        environment:
+            - L1_API=api.l1.id1.state.healthchain.com:12111
 
     # Local Level Services for State-1
     ## Local Service 1 (State-1)
-    mongo.l1.id1.local.healthchain.com:
+    db.l1.id1.local.healthchain.com:
         image: mongo:5.0.9
-        ports:
-            - "11110:27017"
+        networks:
+            - healthnet
+        expose:
+            - "27017"
 
     api.l1.id1.local.healthchain.com:
         extends:
             file: ./local/docker-compose.yml
             service: l1-api
+        networks:
+            - healthnet
         ports:
             - "11111:3000"
         links:
-            - mongo.l1.id1.local.healthchain.com
+            - db.l1.id1.local.healthchain.com
+        environment:
+            - MONGODB_URI=db.l1.id1.local.healthchain.com:27017
 
     api.l2.id1.local.healthchain.com:
         extends:
             file: ./local/docker-compose.yml
             service: l2-api
+        networks:
+            - healthnet
         ports:
             - "11121:3000"
+        environment:
+            - L1_API=api.l1.id1.local.healthchain.com:11111
 
     ## Local Service 2 (State-1)
-    mongo.l1.id2.local.healthchain.com:
+    db.l1.id2.local.healthchain.com:
         image: mongo:5.0.9
+        networks:
+            - healthnet
         ports:
             - "11210:27017"
 
@@ -86,14 +121,22 @@ services:
         extends:
             file: ./local/docker-compose.yml
             service: l1-api
+        networks:
+            - healthnet
         ports:
             - "11211:3000"
         links:
-            - mongo.l1.id2.local.healthchain.com
+            - db.l1.id2.local.healthchain.com
+        environment:
+            - MONGODB_URI=db.l1.id2.local.healthchain.com:27017
 
     api.l2.id2.local.healthchain.com:
         extends:
             file: ./local/docker-compose.yml
             service: l2-api
+        networks:
+            - healthnet
         ports:
             - "11221:3000"
+        environment:
+            - L1_API=api.l1.id1.local.healthchain.com:11211
