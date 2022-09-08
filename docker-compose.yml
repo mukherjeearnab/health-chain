@@ -42,7 +42,7 @@ services:
         ports:
             - "13121:3000"
         environment:
-            - L1_API=api.l1.id1.national.healthchain.com:13111
+            - L1_API=api.l1.id1.national.healthchain.com:3000
 
     # State Level Services for State-1
     db.l1.id1.state.healthchain.com:
@@ -74,7 +74,7 @@ services:
         ports:
             - "12121:3000"
         environment:
-            - L1_API=api.l1.id1.state.healthchain.com:12111
+            - L1_API=api.l1.id1.state.healthchain.com:3000
 
     # Local Level Services for State-1
     ## Local Service 1 (State-1)
@@ -107,7 +107,7 @@ services:
         ports:
             - "11121:3000"
         environment:
-            - L1_API=api.l1.id1.local.healthchain.com:11111
+            - L1_API=api.l1.id1.local.healthchain.com:3000
 
     ## Local Service 2 (State-1)
     db.l1.id2.local.healthchain.com:
@@ -139,4 +139,4 @@ services:
         ports:
             - "11221:3000"
         environment:
-            - L1_API=api.l1.id1.local.healthchain.com:11211
+            - L1_API=api.l1.id1.local.healthchain.com:3000
