@@ -8,6 +8,9 @@ const app = express();
 // configure dotenv
 require('dotenv').config();
 
+// register node to the network registry
+require('./init/register-node')();
+
 // JSON Middleware
 app.use(express.json());
 
