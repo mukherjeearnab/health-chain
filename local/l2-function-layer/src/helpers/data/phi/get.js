@@ -1,7 +1,7 @@
-const axios = require('axios');
+const HTTP = require('../../modules/http');
 
 module.exports = async (AadhaarID) => {
-    const res = await axios.get(`http://${process.env.L1_API}/phi/get/${AadhaarID}`);
+    const res = await HTTP.Get(`http://${process.env.L1_API}/phi/get/${AadhaarID}`);
 
     return res.data;
 };
