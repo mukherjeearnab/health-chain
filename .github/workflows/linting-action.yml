@@ -148,3 +148,26 @@ jobs:
 
             - name: Run linters
               run: npx eslint . --ext .js,.jsx
+
+    registry-lint:
+        name: Run [REGISTRY] ESLint
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: registry
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16.16.0
+
+            # ESLint and Prettier must be in `package.json`
+            - name: Install Node.js dependencies
+              run: npm ci
+
+            - name: Run linters
+              run: npx eslint . --ext .js,.jsx

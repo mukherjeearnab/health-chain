@@ -1,7 +1,8 @@
 const express = require('express');
 const DB = require('../helpers/db');
+const RegistryManager = require('../helpers/registry');
 
-const SchemaName = 'phr';
+const SchemaName = 'state';
 
 const router = new express.Router();
 
@@ -18,8 +19,7 @@ router.post('/create', async (req, res) => {
     try {
         const reply = await DB.Create(object, SchemaName);
 
-        // create the consent management object
-        await DB.Create({ AadhaarID: object.AadhaarID }, 'consent');
+        await RegistryManager.AddState(reply.National, reply.ID);
 
         if (reply) {
             res.status(201).send(reply);
@@ -57,6 +57,25 @@ router.post('/query', async (req, res) => {
 
     try {
         const reply = await DB.Read(query, SchemaName);
+        if (reply) {
+            res.status(200).send(reply);
+        } else {
+            throw new Error('Database Error!');
+        }
+    } catch (err) {
+        console.error('SERVER ERROR', err.message);
+        res.status(500).send({ message: 'Server Error!' });
+    }
+});
+
+// fetch records from the database matching query
+router.post('/add-local/:id', async (req, res) => {
+    // obtain the query object from the body of the request
+    const { LocalID } = req.body;
+
+    try {
+        const reply = await RegistryManager.AddState(req.params.id, LocalID);
+
         if (reply) {
             res.status(200).send(reply);
         } else {

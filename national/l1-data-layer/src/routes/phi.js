@@ -1,7 +1,7 @@
 const express = require('express');
 const DB = require('../helpers/db');
 
-const SchemaName = 'phr';
+const SchemaName = 'phi';
 
 const router = new express.Router();
 
@@ -17,9 +17,6 @@ router.post('/create', async (req, res) => {
 
     try {
         const reply = await DB.Create(object, SchemaName);
-
-        // create the consent management object
-        await DB.Create({ AadhaarID: object.AadhaarID }, 'consent');
 
         if (reply) {
             res.status(201).send(reply);

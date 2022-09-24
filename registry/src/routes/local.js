@@ -1,7 +1,8 @@
 const express = require('express');
 const DB = require('../helpers/db');
+const RegistryManager = require('../helpers/registry');
 
-const SchemaName = 'phr';
+const SchemaName = 'local';
 
 const router = new express.Router();
 
@@ -18,8 +19,7 @@ router.post('/create', async (req, res) => {
     try {
         const reply = await DB.Create(object, SchemaName);
 
-        // create the consent management object
-        await DB.Create({ AadhaarID: object.AadhaarID }, 'consent');
+        await RegistryManager.AddLocal(reply.State, reply.ID);
 
         if (reply) {
             res.status(201).send(reply);

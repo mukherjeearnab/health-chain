@@ -32,3 +32,9 @@ npm run lint
 echo "linting $LINT_DIR $L2_DIR"
 cd $ROOT_DIR$LINT_DIR$L2_DIR
 npm run lint
+
+LINT_DIR='/registry'
+
+echo "linting $LINT_DIR"
+cd $ROOT_DIR$LINT_DIR
+npm run lint

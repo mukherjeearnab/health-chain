@@ -114,8 +114,8 @@ services:
         image: mongo:5.0.9
         networks:
             - healthnet
-        ports:
-            - "11210:27017"
+        expose:
+            - "27017"
 
     api.l1.id2.local.healthchain.com:
         extends:
@@ -140,3 +140,23 @@ services:
             - "11221:3000"
         environment:
             - L1_API=api.l1.id1.local.healthchain.com:3000
+
+    db.registry.healthchain.com:
+        image: mongo:5.0.9
+        networks:
+            - healthnet
+        expose:
+            - "27017"
+
+    api.registry.healthchain.com:
+        extends:
+            file: ./registry/docker-compose.yml
+            service: registry-api
+        networks:
+            - healthnet
+        ports:
+            - "10000:3000"
+        links:
+            - db.registry.healthchain.com
+        environment:
+            - MONGODB_URI=db.registry.healthchain.com:27017
