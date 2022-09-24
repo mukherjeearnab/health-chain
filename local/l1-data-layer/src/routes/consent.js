@@ -5,6 +5,11 @@ const SchemaName = 'consent';
 
 const router = new express.Router();
 
+// root
+router.get('/', async (req, res) => {
+    res.status(200).send(`${SchemaName} route`);
+});
+
 // fetch a consent object from the database
 router.get('/get/:id', async (req, res) => {
     // obtain the AadhaarID object from the params

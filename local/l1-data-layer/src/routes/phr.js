@@ -5,6 +5,11 @@ const SchemaName = 'phr';
 
 const router = new express.Router();
 
+// root
+router.get('/', async (req, res) => {
+    res.status(200).send(`${SchemaName} route`);
+});
+
 // create a new record object
 router.post('/create', async (req, res) => {
     // obtain the record object fro the body of the request
@@ -12,6 +17,10 @@ router.post('/create', async (req, res) => {
 
     try {
         const reply = await DB.Create(object, SchemaName);
+
+        // create the consent management object
+        await DB.Create({ AadhaarID: object.AadhaarID }, 'consent');
+
         if (reply) {
             res.status(201).send(reply);
         } else {

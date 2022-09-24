@@ -1,9 +1,14 @@
 const express = require('express');
-const DB = require('../helpers/db');
+const DB = require('../../helpers/db');
 
-const SchemaName = 'phi';
+const SchemaName = 'hworker_reg';
 
 const router = new express.Router();
+
+// root
+router.get('/', async (req, res) => {
+    res.status(200).send(`${SchemaName} route`);
+});
 
 // create a new record object
 router.post('/create', async (req, res) => {
@@ -12,7 +17,6 @@ router.post('/create', async (req, res) => {
 
     try {
         const reply = await DB.Create(object, SchemaName);
-        await DB.Create({ AadhaarID: object.AadhaarID }, 'consent');
         if (reply) {
             res.status(201).send(reply);
         } else {
@@ -27,10 +31,10 @@ router.post('/create', async (req, res) => {
 // fetch a record object from the database
 router.get('/get/:id', async (req, res) => {
     // obtain the AadhaarID object from the params
-    const AadhaarID = req.params.id;
+    const ID = req.params.id;
 
     try {
-        const reply = await DB.Read({ AadhaarID }, SchemaName);
+        const reply = await DB.Read({ ID }, SchemaName);
         if (reply) {
             res.status(200).send(reply[0]);
         } else {
