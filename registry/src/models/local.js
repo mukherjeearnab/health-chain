@@ -9,7 +9,7 @@ const model = require('./schema/local');
 const schema = new mongoose.Schema(model);
 
 // create Mongoose model using the schema
-const objectModel = mongoose.model('PHIConsent', schema);
+const objectModel = mongoose.model('local', schema);
 
 // export Mongoose model
 module.exports = objectModel;
