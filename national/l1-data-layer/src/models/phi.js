@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 require('../db/mongoose');
 
 // import JSON game model schema
-const model = require('./schema/hworker_reg');
+const model = require('./schema/phi');
 
 // create Mongoose schema using JSON game model
 const schema = new mongoose.Schema(model);
 
 // create Mongoose model using the schema
-const objectModel = mongoose.model('healthWorkerRegistry', schema);
+const objectModel = mongoose.model('patientHealthInformation', schema);
 
 // export Mongoose model
 module.exports = objectModel;
