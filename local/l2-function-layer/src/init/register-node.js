@@ -8,6 +8,8 @@ module.exports = async () => {
         State: process.env.NODE_STATE_ID
     };
 
+    console.log('Registering Node', node);
+
     const res = await HTTP.Post(`http://${process.env.REGISTRY_API}/local/create`, node);
 
     console.log('Node Registration Status', res.status);
