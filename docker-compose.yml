@@ -12,6 +12,27 @@ networks:
 # Example: 12120 = 'DB' of 'Layer 2' of 'ID 1' at 'State Level', 'Healthchain'
 
 services:
+    # Network Registry Service
+    db.registry.healthchain.com:
+        extends:
+            file: ./common/docker-compose.yml
+            service: mongo
+
+    api.registry.healthchain.com:
+        extends:
+            file: ./registry/docker-compose.yml
+            service: registry-api
+        networks:
+            - healthnet
+        ports:
+            - "10000:3000"
+        links:
+            - db.registry.healthchain.com
+        environment:
+            - MONGODB_URI=db.registry.healthchain.com:27017
+        depends_on:
+            - db.registry.healthchain.com
+
     # National Level Services
     db.l1.id1.national.healthchain.com:
         image: mongo:5.0.9
@@ -108,6 +129,13 @@ services:
             - "11121:3000"
         environment:
             - L1_API=api.l1.id1.local.healthchain.com:3000
+            - NODE_ID=S1H1
+            - NODE_PREFIX=id1.local.healthchain.com
+            - NODE_NAME="Hospital 1 State 1"
+            - NODE_STATE_ID=id1
+            - REGISTRY_API=api.registry.healthchain.com:3000
+        depends_on:
+            - api.registry.healthchain.com
 
     ## Local Service 2 (State-1)
     db.l1.id2.local.healthchain.com:
@@ -140,23 +168,10 @@ services:
             - "11221:3000"
         environment:
             - L1_API=api.l1.id1.local.healthchain.com:3000
-
-    db.registry.healthchain.com:
-        image: mongo:5.0.9
-        networks:
-            - healthnet
-        expose:
-            - "27017"
-
-    api.registry.healthchain.com:
-        extends:
-            file: ./registry/docker-compose.yml
-            service: registry-api
-        networks:
-            - healthnet
-        ports:
-            - "10000:3000"
-        links:
-            - db.registry.healthchain.com
-        environment:
-            - MONGODB_URI=db.registry.healthchain.com:27017
+            - NODE_ID=S1H2
+            - NODE_PREFIX=id2.local.healthchain.com
+            - NODE_NAME="Hospital 2 State 1"
+            - NODE_STATE_ID=id2
+            - REGISTRY_API=api.registry.healthchain.com:3000
+        depends_on:
+            - api.registry.healthchain.com
