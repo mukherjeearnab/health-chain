@@ -5,7 +5,7 @@ module.exports = async () => {
         ID: process.env.NODE_ID,
         ConnectionPrefix: process.env.NODE_PREFIX,
         Name: process.env.NODE_NAME,
-        State: process.env.NODE_STATE_ID
+        National: process.env.NODE_NATIONAL_ID
     };
 
     console.log('Registering Node', node);
@@ -14,10 +14,9 @@ module.exports = async () => {
     do {
         try {
             // eslint-disable-next-line no-await-in-loop
-            res = await HTTP.Post(`http://${process.env.REGISTRY_API}/local/create`, node);
-            console.log(res);
+            res = await HTTP.Post(`http://${process.env.REGISTRY_API}/state/create`, node);
         } catch (ex) {
-            console.log('Retrying.', ex.response.status);
+            console.log('Retrying.', res.status);
         }
     } while (res.status !== 201);
 

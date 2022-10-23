@@ -20,4 +20,3 @@ docker image rm -f ndhb-proto_api.l2.id1.local.healthchain.com:latest
 docker image rm -f ndhb-proto_api.l1.id2.local.healthchain.com:latest
 docker image rm -f ndhb-proto_api.l1.id1.local.healthchain.com:latest
 docker image rm -f ndhb-proto_api.registry.healthchain.com:latest
-docker image rm -f ndhb-proto_db.registry.healthchain.com:latest

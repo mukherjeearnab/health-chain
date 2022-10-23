@@ -11,11 +11,11 @@ require('dotenv').config();
 // register node to the network registry
 const Register = require('./init/register-node');
 
-(async () => {
+setTimeout(async () => {
     console.log('Registration Starting.');
     await Register();
     console.log('Registration End.');
-})();
+});
 
 // JSON Middleware
 app.use(express.json());
