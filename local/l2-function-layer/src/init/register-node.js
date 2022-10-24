@@ -15,7 +15,6 @@ module.exports = async () => {
         try {
             // eslint-disable-next-line no-await-in-loop
             res = await HTTP.Post(`http://${process.env.REGISTRY_API}/local/create`, node);
-            console.log(res);
         } catch (ex) {
             console.log('Retrying.', ex.response.status);
         }

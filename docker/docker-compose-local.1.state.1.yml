@@ -44,7 +44,7 @@ services:
             - L1_API=api.l1.id1.local.healthchain.com:3000
             - NODE_ID=id1
             - NODE_PREFIX=id1.local.healthchain.com
-            - NODE_NAME="Hospital 1 State 1"
+            - NODE_NAME=Hospital 1 State 1
             - NODE_STATE_ID=id1
             - REGISTRY_API=api.registry.healthchain.com:3000
         depends_on:
