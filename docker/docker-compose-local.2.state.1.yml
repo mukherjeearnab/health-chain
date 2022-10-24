@@ -1,0 +1,51 @@
+version: "3"
+
+networks:
+    healthnet:
+
+## PORT allocation scheme:
+# 1th digit: Service type: (0 = db, 1 = api)
+# 2nd digit: Layer number (1 = l1, 2 = l2)
+# 3rd digit: ID of service [since multiple services like hospitals, states can exist] (>= 1)
+# 4th digit: Level of service (1 = local, 2 = state, 3 = national)
+# 5th digit: HealthChain service identifier (1xxxx)
+# Example: 12120 = 'DB' of 'Layer 2' of 'ID 1' at 'State Level', 'Healthchain'
+
+services:
+    # Local Level Services for State-1
+    ## Local Service 2 (State-1)
+    db.l1.id2.local.healthchain.com:
+        extends:
+            file: ./common/docker-compose-db.yml
+            service: mongo
+
+    api.l1.id2.local.healthchain.com:
+        extends:
+            file: ../local/docker-compose.yml
+            service: l1-api
+        networks:
+            - healthnet
+        ports:
+            - "11211:3000"
+        links:
+            - db.l1.id2.local.healthchain.com
+        environment:
+            - MONGODB_URI=db.l1.id2.local.healthchain.com:27017
+
+    api.l2.id2.local.healthchain.com:
+        extends:
+            file: ../local/docker-compose.yml
+            service: l2-api
+        networks:
+            - healthnet
+        ports:
+            - "11221:3000"
+        environment:
+            - L1_API=api.l1.id1.local.healthchain.com:3000
+            - NODE_ID=id2
+            - NODE_PREFIX=id2.local.healthchain.com
+            - NODE_NAME=Hospital 2 State 1
+            - NODE_STATE_ID=id1
+            - REGISTRY_API=api.registry.healthchain.com:3000
+        depends_on:
+            - api.l2.id1.state.healthchain.com

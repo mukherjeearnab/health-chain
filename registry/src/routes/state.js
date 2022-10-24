@@ -35,10 +35,10 @@ router.post('/create', async (req, res) => {
 // fetch a record object from the database
 router.get('/get/:id', async (req, res) => {
     // obtain the AadhaarID object from the params
-    const AadhaarID = req.params.id;
+    const ID = req.params.id;
 
     try {
-        const reply = await DB.Read({ AadhaarID }, SchemaName);
+        const reply = await DB.Read({ ID }, SchemaName);
         if (reply) {
             res.status(200).send(reply[0]);
         } else {
