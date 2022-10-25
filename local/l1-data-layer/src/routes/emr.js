@@ -1,7 +1,7 @@
 const express = require('express');
 const DB = require('../helpers/db');
 
-const SchemaName = 'phr';
+const SchemaName = 'emr';
 
 const router = new express.Router();
 
