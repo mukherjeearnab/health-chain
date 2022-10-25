@@ -11,8 +11,16 @@ module.exports = async (AadhaarID, StateID) => {
         };
     }
 
-    // add the new state to the object
+    // if state is already in the list, skip, and return
     const object = check;
+    if (object.StateLocations.includes(StateID))
+        return {
+            status: 201,
+            data: undefined,
+            message: 'StateID already exist! Update Operation Successful.'
+        };
+
+    // add the new state to the object
     object.StateLocations.push(StateID);
 
     // create the object
