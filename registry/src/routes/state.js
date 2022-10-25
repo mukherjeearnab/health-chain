@@ -17,7 +17,7 @@ router.post('/create', async (req, res) => {
     const object = req.body;
 
     try {
-        const reply = await DB.Create(object, SchemaName);
+        const reply = await DB.Create({ ID: object.ID }, object, SchemaName);
 
         await RegistryManager.AddState(reply.National, reply.ID);
 

@@ -16,10 +16,14 @@ router.post('/create', async (req, res) => {
     const object = req.body;
 
     try {
-        const reply = await DB.Create(object, SchemaName);
+        const reply = await DB.Create({ AadhaarID: object.AadhaarID }, object, SchemaName);
 
         // create the consent management object
-        await DB.Create({ AadhaarID: object.AadhaarID }, 'consent');
+        await DB.Create(
+            { AadhaarID: object.AadhaarID },
+            { AadhaarID: object.AadhaarID },
+            'consent'
+        );
 
         if (reply) {
             res.status(201).send(reply);

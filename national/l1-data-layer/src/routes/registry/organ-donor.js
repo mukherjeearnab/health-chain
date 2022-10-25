@@ -16,7 +16,7 @@ router.post('/create', async (req, res) => {
     const object = req.body;
 
     try {
-        const reply = await DB.Create(object, SchemaName);
+        const reply = await DB.Create({ ID: object.ID }, object, SchemaName);
         if (reply) {
             res.status(201).send(reply);
         } else {
