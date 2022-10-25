@@ -1,3 +1,4 @@
 const HIE = require('./hie');
+const PHI = require('./phi');
 
-module.exports = { HIE };
+module.exports = { HIE, PHI };
