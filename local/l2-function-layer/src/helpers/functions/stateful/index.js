@@ -1,3 +1,4 @@
 const Consent = require('./consent');
+const EMR = require('./emr');
 
-module.exports = { Consent };
+module.exports = { Consent, EMR };

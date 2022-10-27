@@ -1,11 +1,13 @@
 const Consent = require('./consent');
 const HIE = require('./hie');
-const PHR = require('./phr');
-const PHI = require('./phi');
+const EHR = require('./ehr');
+const EMR = require('./emr');
+const Registry = require('./registry');
 
 module.exports = {
     Consent,
     HIE,
-    PHR,
-    PHI
+    EHR,
+    EMR,
+    Registry
 };

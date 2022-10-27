@@ -1,6 +1,6 @@
 module.exports = {
     AadhaarID: String,
-    MedicalHistory: [
+    MedicalRecords: [
         {
             Timestamp: Number,
             DoctorID: String,

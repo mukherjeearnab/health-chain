@@ -1,3 +1,4 @@
 const HIE = require('./hie');
+const EHR = require('./ehr');
 
-module.exports = { HIE };
+module.exports = { HIE, EHR };
