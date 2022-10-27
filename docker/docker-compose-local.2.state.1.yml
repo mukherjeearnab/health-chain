@@ -41,7 +41,7 @@ services:
         ports:
             - "11221:3000"
         environment:
-            - L1_API=api.l1.id1.local.healthchain.com:3000
+            - L1_API=api.l1.id2.local.healthchain.com:3000
             - NODE_ID=id2
             - NODE_PREFIX=id2.local.healthchain.com
             - NODE_NAME=Hospital 2 State 1

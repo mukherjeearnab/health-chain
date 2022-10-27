@@ -38,7 +38,8 @@ module.exports = async (AadhaarID) => {
             console.log('GOT EMR', MedicalRecords);
 
             // add the records to the assembly object
-            for (let k = 0; k < MedicalRecords.length; k += 1) assembly.EMR.push(MedicalRecords[k]);
+            for (let k = 0; k < MedicalRecords.length; k += 1)
+                assembly.EMR.push({ state: StateID, local: LocalID, record: MedicalRecords[k] });
         }
     }
 
