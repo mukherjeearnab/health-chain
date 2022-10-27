@@ -18,6 +18,21 @@ router.get('/get/:id', async (req, res) => {
     }
 });
 
+// assemble
+router.get('/assemble/:id', async (req, res) => {
+    // obtain the id of the record to update
+    const AadhaarID = req.params.id;
+
+    try {
+        const reply = await Functions.Stateful.PHI.Assemble(AadhaarID);
+        if (reply.status === 404) res.status(404).send({ message: 'PHI not found!' });
+        else res.status(200).send(reply.data);
+    } catch (err) {
+        console.error('SERVER ERROR', err.message);
+        res.status(500).send({ message: 'Server Error!' });
+    }
+});
+
 // create
 router.post('/create', async (req, res) => {
     // obtain the record object from the body of the request
