@@ -8,7 +8,7 @@ module.exports = async (id, object, schemaName) => {
         const check = await Schema.find(id);
         if (check.length > 0) {
             console.log('Entry already exists! Create action aborted.');
-            return 200;
+            return check[0];
         }
 
         // Create the schema object into the database

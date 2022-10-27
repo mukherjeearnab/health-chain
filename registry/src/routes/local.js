@@ -17,15 +17,9 @@ router.post('/create', async (req, res) => {
     const object = req.body;
 
     try {
-        const reply = await DB.Create({ ID: object.ID }, object, SchemaName);
+        await RegistryManager.AddLocal(object);
 
-        await RegistryManager.AddLocal(reply.State, reply.ID);
-
-        if (reply) {
-            res.status(201).send(reply);
-        } else {
-            throw new Error('Database Error!');
-        }
+        res.status(201).send();
     } catch (err) {
         console.error('SERVER ERROR', err.message);
         res.status(500).send({ message: 'Server Error!' });
