@@ -1,0 +1,13 @@
+# ---------------------------------------------------------------------------
+# "PeerOrgs" - Definition of organizations managing peer nodes
+# ---------------------------------------------------------------------------
+PeerOrgs:
+    - Name: State1
+      Domain: id1.state.healthchain.com
+      EnableNodeOUs: true
+      Template:
+          Count: 1
+          SANS:
+              - localhost
+      Users:
+          Count: 1
