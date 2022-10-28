@@ -7,7 +7,7 @@ networks:
     healthnet:
 
 ## PORT allocation scheme:
-# 1th digit: Service type: (0 = db, 1 = api, 2 = peer, 3 = fabric-api, 4 = chaincode)
+# 1th digit: Service type: (0 = db, 1 = api, 2 = peer, 3 = fabric-api, 4 = chaincode, 5 = ca)
 # 2nd digit: Layer number (1 = l1, 2 = l2, 3 = blockchain)
 # 3rd digit: ID of service [since multiple services like hospitals, states can exist] (>= 1)
 # 4th digit: Level of service (1 = local, 2 = state, 3 = national, 4 = orderer)
@@ -16,25 +16,37 @@ networks:
 
 services:
     peer0.id1.national.healthchain.com:
-    extends:
-        file: ./common/peer-base.yml
-        service: peer-base
-    environment:
-        # Peer specific variabes
-        - CORE_PEER_ID=peer0.id1.national.healthchain.com
-        - CORE_PEER_ADDRESS=peer0.id1.national.healthchain.com:13132
-        - CORE_PEER_LISTENADDRESS=0.0.0.0:13132
-        - CORE_PEER_CHAINCODEADDRESS=peer0.id1.national.healthchain.com:13134
-        - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:13134
-        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.id1.national.healthchain.com:13132
-        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.id1.national.healthchain.com:13132
-        - CORE_PEER_LOCALMSPID=NationalMSP
-    volumes:
-        - /var/run/docker.sock:/host/var/run/docker.sock
-        - ../../organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/msp:/etc/hyperledger/fabric/msp
-        - ../../organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.id1.national.healthchain.com:/var/hyperledger/production
-    ports:
-        - 13132:13132
-    networks:
-        - healthnet
+        extends:
+            file: ./common/peer-base.yml
+            service: peer-base
+        environment:
+            # Peer specific variabes
+            - CORE_PEER_ID=peer0.id1.national.healthchain.com
+            - CORE_PEER_ADDRESS=peer0.id1.national.healthchain.com:13132
+            - CORE_PEER_LISTENADDRESS=0.0.0.0:13132
+            - CORE_PEER_CHAINCODEADDRESS=peer0.id1.national.healthchain.com:13134
+            - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:13134
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.id1.national.healthchain.com:13132
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.id1.national.healthchain.com:13132
+            - CORE_PEER_LOCALMSPID=NationalMSP
+        volumes:
+            - /var/run/docker.sock:/host/var/run/docker.sock
+            - ../../organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/msp:/etc/hyperledger/fabric/msp
+            - ../../organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/tls:/etc/hyperledger/fabric/tls
+            - peer0.id1.national.healthchain.com:/var/hyperledger/production
+        ports:
+            - 13132:13132
+        networks:
+            - healthnet
+
+    ca.id1.national.healthchain.com:
+        extends:
+            file: ./common/ca-base.yml
+            service: ca-base
+        environment:
+            - FABRIC_CA_SERVER_CA_NAME=ca.id1.national.healthchain.com
+            - FABRIC_CA_SERVER_PORT=13135
+        ports:
+            - "13135:13135"
+        volumes:
+            - ../fabric-ca/id1.national.healthchain.com:/etc/hyperledger/fabric-ca-server
