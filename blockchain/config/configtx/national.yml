@@ -1,0 +1,32 @@
+################################################################################
+#
+#   Section: Organizations
+#
+#   - This section defines the different organizational identities which will
+#   be referenced later in the configuration.
+#
+################################################################################
+Organizations:
+    - &id1.national.healthchain.com
+      # DefaultOrg defines the organization which is used in the sampleconfig
+      # of the fabric.git development environment
+      Name: NationalMSP
+
+      # ID to load the MSP definition as
+      ID: NationalMSP
+
+      MSPDir: ../organizations/peerOrganizations/id1.national.healthchain.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('NationalMSP.admin', 'NationalMSP.peer', 'NationalMSP.client')"
+          Writers:
+              Type: Signature
+              Rule: "OR('NationalMSP.admin', 'NationalMSP.client')"
+          Admins:
+              Type: Signature
+              Rule: "OR('NationalMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('NationalMSP.peer')"
