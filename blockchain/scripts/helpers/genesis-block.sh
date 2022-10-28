@@ -1,3 +1,5 @@
+CHANNEL_NAME="mainchannel"
+
 cat ./config/configtx/local.1.yml \
     ./config/configtx/local.2.yml \
     ./config/configtx/state.1.yml \
@@ -7,6 +9,7 @@ cat ./config/configtx/local.1.yml \
 cd ./gen
 
 mkdir system-genesis-block
+mkdir channel-artifacts
 
 cd ..
 
@@ -14,3 +17,8 @@ cd ..
     -profile HealthChainOrdererGenesis \
     -channelID system-channel \
     -outputBlock ./gen/system-genesis-block/genesis.block
+
+./gen/bin/configtxgen -configPath ./gen \
+    -profile HealthChainChannel \
+    -outputCreateChannelTx ./gen/channel-artifacts/${CHANNEL_NAME}.tx \
+    -channelID $CHANNEL_NAME
