@@ -1,0 +1,40 @@
+version: "3"
+
+volumes:
+    peer0.id1.local.healthchain.com:
+
+networks:
+    healthnet:
+
+## PORT allocation scheme:
+# 1th digit: Service type: (0 = db, 1 = api, 2 = peer, 3 = fabric-api, 4 = chaincode)
+# 2nd digit: Layer number (1 = l1, 2 = l2, 3 = blockchain)
+# 3rd digit: ID of service [since multiple services like hospitals, states can exist] (>= 1)
+# 4th digit: Level of service (1 = local, 2 = state, 3 = national, 4 = orderer)
+# 5th digit: HealthChain service identifier (1xxxx)
+# Example: 12120 = 'DB' of 'Layer 2' of 'ID 1' at 'State Level', 'Healthchain'
+
+services:
+    peer0.id1.local.healthchain.com:
+    extends:
+        file: ./common/peer-base.yml
+        service: peer-base
+    environment:
+        # Peer specific variabes
+        - CORE_PEER_ID=peer0.id1.local.healthchain.com
+        - CORE_PEER_ADDRESS=peer0.id1.local.healthchain.com:11132
+        - CORE_PEER_LISTENADDRESS=0.0.0.0:11132
+        - CORE_PEER_CHAINCODEADDRESS=peer0.id1.local.healthchain.com:11134
+        - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11134
+        - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.id1.local.healthchain.com:11132
+        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.id1.local.healthchain.com:11132
+        - CORE_PEER_LOCALMSPID=Local1MSP
+    volumes:
+        - /var/run/docker.sock:/host/var/run/docker.sock
+        - ../../organizations/peerOrganizations/id1.local.healthchain.com/peers/peer0.id1.local.healthchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../../organizations/peerOrganizations/id1.local.healthchain.com/peers/peer0.id1.local.healthchain.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.id1.local.healthchain.com:/var/hyperledger/production
+    ports:
+        - 11132:11132
+    networks:
+        - healthnet
