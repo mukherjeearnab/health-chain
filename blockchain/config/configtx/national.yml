@@ -7,7 +7,7 @@
 #
 ################################################################################
 Organizations:
-    - &id1.national.healthchain.com
+    - &NationalMSP
       # DefaultOrg defines the organization which is used in the sampleconfig
       # of the fabric.git development environment
       Name: NationalMSP

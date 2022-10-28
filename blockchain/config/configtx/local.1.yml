@@ -7,7 +7,7 @@
 #
 ################################################################################
 Organizations:
-    - &id1.local.healthchain.com
+    - &Local1MSP
       # DefaultOrg defines the organization which is used in the sampleconfig
       # of the fabric.git development environment
       Name: Local1MSP

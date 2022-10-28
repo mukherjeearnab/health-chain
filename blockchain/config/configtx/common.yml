@@ -9,10 +9,10 @@
 Organizations:
     # SampleOrg defines an MSP using the sampleconfig.  It should never be used
     # in production but may be used as a template for other definitions
-    - &orderer.blc.healthchain.com
+    - &OrdererOrg
       # DefaultOrg defines the organization which is used in the sampleconfig
       # of the fabric.git development environment
-      Name: orderer.blc.healthchain.com
+      Name: OrdererOrg
 
       # ID to load the MSP definition as
       ID: OrdererMSP
@@ -233,27 +233,31 @@ Channel: &ChannelDefaults
 #   as parameters to the configtxgen tool
 #
 ################################################################################
-# Profiles:
-#     HealthChainOrdererGenesis:
-#         <<: *ChannelDefaults
-#         Orderer:
-#             <<: *OrdererDefaults
-#             Organizations:
-#                 - *orderer.blc.healthchain.com
-#             Capabilities:
-#                 <<: *OrdererCapabilities
-#         Consortiums:
-#             SampleConsortium:
-#                 Organizations:
-#                     - *Org1
-#                     - *Org2
-#     HealthChainChannel:
-#         Consortium: SampleConsortium
-#         <<: *ChannelDefaults
-#         Application:
-#             <<: *ApplicationDefaults
-#             Organizations:
-#                 - *Org1
-#                 - *Org2
-#             Capabilities:
-#                 <<: *ApplicationCapabilities
+Profiles:
+    HealthChainOrdererGenesis:
+        <<: *ChannelDefaults
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *Local1MSP
+                    - *Local2MSP
+                    - *State1MSP
+                    - *NationalMSP
+    HealthChainChannel:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Local1MSP
+                - *Local2MSP
+                - *State1MSP
+                - *NationalMSP
+            Capabilities:
+                <<: *ApplicationCapabilities
