@@ -13,8 +13,8 @@ services:
             service: orderer-base
         volumes:
             - ../gen/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-            - ../organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
-            - ../organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
+            - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
+            - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
             - orderer.blc.healthchain.com:/var/hyperledger/production/orderer
         ports:
             - 7050:7050
@@ -29,7 +29,7 @@ services:
         volumes:
             - /var/run/:/host/var/run/
             - ../gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
-            - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+            - ../gen/scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         depends_on:
             - orderer.blc.healthchain.com
             - peer0.id1.local.healthchain.com
