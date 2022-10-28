@@ -31,8 +31,8 @@ services:
             - CORE_PEER_LOCALMSPID=NationalMSP
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
-            - ../../organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/msp:/etc/hyperledger/fabric/msp
-            - ../../organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/tls:/etc/hyperledger/fabric/tls
+            - ./gen/organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/msp:/etc/hyperledger/fabric/msp
+            - ./gen/organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/tls:/etc/hyperledger/fabric/tls
             - peer0.id1.national.healthchain.com:/var/hyperledger/production
         ports:
             - 13132:13132

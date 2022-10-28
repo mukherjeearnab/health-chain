@@ -15,7 +15,7 @@ Organizations:
       # ID to load the MSP definition as
       ID: Local1MSP
 
-      MSPDir: ../organizations/peerOrganizations/id1.local.healthchain.com/msp
+      MSPDir: ./organizations/peerOrganizations/id1.local.healthchain.com/msp
 
       Policies:
           Readers:

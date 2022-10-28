@@ -18,7 +18,7 @@ Organizations:
       ID: OrdererMSP
 
       # MSPDir is the filesystem path which contains the MSP configuration
-      MSPDir: ../organizations/ordererOrganizations/blc.healthchain.com/msp
+      MSPDir: ./organizations/ordererOrganizations/blc.healthchain.com/msp
 
       # Policies defines the set of policies at this level of the config tree
       # For organization policies, their canonical path is usually
@@ -151,8 +151,8 @@ Orderer: &OrdererDefaults # Orderer Type: The orderer implementation to start
         Consenters:
             - Host: orderer.blc.healthchain.com
               Port: 7050
-              ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.blc.healthchain.com/tls/server.crt
-              ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.blc.healthchain.com/tls/server.crt
+              ClientTLSCert: ./organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/server.crt
+              ServerTLSCert: ./organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/server.crt
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s

@@ -15,7 +15,7 @@ Organizations:
       # ID to load the MSP definition as
       ID: NationalMSP
 
-      MSPDir: ../organizations/peerOrganizations/id1.national.healthchain.com/msp
+      MSPDir: ./organizations/peerOrganizations/id1.national.healthchain.com/msp
 
       Policies:
           Readers:

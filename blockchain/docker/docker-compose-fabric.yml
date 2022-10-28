@@ -1,7 +1,7 @@
 version: "3"
 
 volumes:
-    orderer.example.com:
+    orderer.blc.healthchain.com:
 
 networks:
     healthnet:
@@ -13,8 +13,8 @@ services:
             service: orderer-base
         volumes:
             - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-            - ../organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
-            - ../organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
+            - ./organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
+            - ./organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
             - orderer.blc.healthchain.com:/var/hyperledger/production/orderer
         ports:
             - 7050:7050
