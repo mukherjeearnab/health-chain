@@ -2,7 +2,7 @@ version: "3"
 
 services:
     ca-base:
-        image: hyperledger/fabric-ca:2.2
+        image: hyperledger/fabric-ca:1.5
         environment:
             - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
             # - FABRIC_CA_SERVER_CA_NAME=ca-org3
@@ -12,4 +12,4 @@ services:
         #     - "11054:11054"
         command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
         # volumes:
-        #     - ../fabric-ca/org3:/etc/hyperledger/fabric-ca-server
+        #     - ../genn/fabric-ca/org3:/etc/hyperledger/fabric-ca-server

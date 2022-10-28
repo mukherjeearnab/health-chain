@@ -31,8 +31,8 @@ services:
             - CORE_PEER_LOCALMSPID=State1MSP
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
-            - ./gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/msp:/etc/hyperledger/fabric/msp
-            - ./gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/tls:/etc/hyperledger/fabric/tls
+            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/msp:/etc/hyperledger/fabric/msp
+            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/tls:/etc/hyperledger/fabric/tls
             - peer0.id1.state.healthchain.com:/var/hyperledger/production
         ports:
             - 12132:12132
@@ -49,4 +49,4 @@ services:
         ports:
             - "12135:12135"
         volumes:
-            - ../fabric-ca/id1.state.healthchain.com:/etc/hyperledger/fabric-ca-server
+            - ../gen/fabric-ca/id1.state.healthchain.com:/etc/hyperledger/fabric-ca-server

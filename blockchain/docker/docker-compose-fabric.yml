@@ -12,7 +12,7 @@ services:
             file: ./common/orderer-base.yml
             service: orderer-base
         volumes:
-            - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+            - ../gen/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
             - ./organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
             - ./organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
             - orderer.blc.healthchain.com:/var/hyperledger/production/orderer
@@ -28,10 +28,13 @@ services:
             service: cli-base
         volumes:
             - /var/run/:/host/var/run/
-            - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
-            - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+            - ../gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
+            - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         depends_on:
-            # - peer0.org1.example.com
-            # - peer0.org2.example.com
+            - orderer.blc.healthchain.com
+            - peer0.id1.local.healthchain.com
+            - peer0.id2.local.healthchain.com
+            - peer0.id1.state.healthchain.com
+            - peer0.id1.national.healthchain.com
         networks:
             - healthnet

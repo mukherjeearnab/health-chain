@@ -31,8 +31,8 @@ services:
             - CORE_PEER_LOCALMSPID=Local1MSP
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
-            - ./gen/organizations/peerOrganizations/id1.local.healthchain.com/peers/peer0.id1.local.healthchain.com/msp:/etc/hyperledger/fabric/msp
-            - ./gen/organizations/peerOrganizations/id1.local.healthchain.com/peers/peer0.id1.local.healthchain.com/tls:/etc/hyperledger/fabric/tls
+            - ../gen/organizations/peerOrganizations/id1.local.healthchain.com/peers/peer0.id1.local.healthchain.com/msp:/etc/hyperledger/fabric/msp
+            - ../gen/organizations/peerOrganizations/id1.local.healthchain.com/peers/peer0.id1.local.healthchain.com/tls:/etc/hyperledger/fabric/tls
             - peer0.id1.local.healthchain.com:/var/hyperledger/production
         ports:
             - 11132:11132
@@ -49,4 +49,4 @@ services:
         ports:
             - "11135:11135"
         volumes:
-            - ../fabric-ca/id1.local.healthchain.com:/etc/hyperledger/fabric-ca-server
+            - ../gen/fabric-ca/id1.local.healthchain.com:/etc/hyperledger/fabric-ca-server

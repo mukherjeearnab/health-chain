@@ -25,8 +25,8 @@ services:
             # - CORE_PEER_LOCALMSPID=Org3MSP
         # volumes:
         #     - /var/run/docker.sock:/host/var/run/docker.sock
-        #     - ./gen/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp:/etc/hyperledger/fabric/msp
-        #     - ./gen/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls:/etc/hyperledger/fabric/tls
+        #     - ../gen/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp:/etc/hyperledger/fabric/msp
+        #     - ../gen/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls:/etc/hyperledger/fabric/tls
         #     - peer0.org3.example.com:/var/hyperledger/production
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
         command: peer node start
