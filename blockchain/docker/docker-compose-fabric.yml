@@ -1,0 +1,37 @@
+version: "3"
+
+volumes:
+    orderer.example.com:
+
+networks:
+    healthnet:
+
+services:
+    orderer.blc.healthchain.com:
+        extends:
+            file: ./common/orderer-base.yml
+            service: orderer-base
+        volumes:
+            - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+            - ../organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
+            - ../organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
+            - orderer.blc.healthchain.com:/var/hyperledger/production/orderer
+        ports:
+            - 7050:7050
+            - 9443:9443
+        networks:
+            - healthnet
+
+    cli.blc.healthchain.com:
+        extends:
+            file: ./common/cli-base.yml
+            service: cli-base
+        volumes:
+            - /var/run/:/host/var/run/
+            - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
+            - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        depends_on:
+            # - peer0.org1.example.com
+            # - peer0.org2.example.com
+        networks:
+            - healthnet

@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+    cli-base:
+        image: hyperledger/fabric-tools:2.2
+        tty: true
+        stdin_open: true
+        environment:
+            - GOPATH=/opt/gopath
+            - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+            # - FABRIC_LOGGING_SPEC=INFO
+            - FABRIC_LOGGING_SPEC=DEBUG
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+        command: /bin/bash
+        volumes:
+            # - /var/run/:/host/var/run/
+            # - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
+            # - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
