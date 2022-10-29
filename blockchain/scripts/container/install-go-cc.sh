@@ -1,9 +1,11 @@
-PEER=$1
-ORG=$2
-MSP=$3
-PORT=$4
+CHAINCODE=$1
+PEER=$2
+ORG=$3
+MSP=$4
+PORT=$5
+VERSION=$6
 
-DELAY=10
+DELAY=1
 
 CHANNEL_NAME="mainchannel"
 
@@ -17,12 +19,9 @@ CORE_PEER_ADDRESS=$PEER.$ORG.healthchain.com:$PORT
 CORE_PEER_TLS_ENABLED=true
 ORDERER_SYSCHAN_ID=system-channel
 
-BLOCKFILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/${CHANNEL_NAME}.block
-
-echo "Joining $PEER.$ORG.healthchain.com to $CHANNEL_NAME, with MSP_ID $MSP on PORT $PORT"
+echo "Installing $CHAINCODE on $PEER.$ORG.healthchain.com to $CHANNEL_NAME, with MSP_ID $MSP on PORT $PORT"
 
 sleep $DELAY
 
-peer channel join -b $BLOCKFILE >&log.txt
-
+peer lifecycle chaincode install ${CHAINCODE}.tar.gz >&log.txt
 cat log.txt

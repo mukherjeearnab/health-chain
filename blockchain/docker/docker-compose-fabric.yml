@@ -48,6 +48,7 @@ services:
             - ../gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/
             - ../scripts/container:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
             - ../gen/channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
+            - ../contracts:/usr/local/go/src/
         depends_on:
             - orderer.blc.healthchain.com
             - peer0.id1.local.healthchain.com
