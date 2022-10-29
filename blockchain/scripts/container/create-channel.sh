@@ -13,7 +13,7 @@ CORE_PEER_ADDRESS=peer0.id1.national.healthchain.com:13132
 CORE_PEER_TLS_ENABLED=true
 ORDERER_SYSCHAN_ID=system-channel
 
-echo "Creating channel ${CHANNEL_NAME}"
+echo "Creating channel ${CHANNEL_NAME}, and adding $CORE_PEER_ADDRESS with MSP_ID $CORE_PEER_LOCALMSPID"
 
 sleep $DELAY
 
@@ -22,9 +22,9 @@ peer channel create -o orderer.blc.healthchain.com:7050 \
     -c $CHANNEL_NAME \
     --ordererTLSHostnameOverride orderer.blc.healthchain.com \
     -f ./channel-artifacts/${CHANNEL_NAME}.tx \
-    \
+    --outputBlock $BLOCKFILE \
     --tls \
-    --cafile $ORDERER_CA >&log.txt # --outputBlock $BLOCKFILE \
+    --cafile $ORDERER_CA >&log.txt
 
 cat log.txt
 
