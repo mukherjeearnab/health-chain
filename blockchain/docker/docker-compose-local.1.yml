@@ -50,3 +50,5 @@ services:
             - "11135:11135"
         volumes:
             - ../gen/fabric-ca/id1.local.healthchain.com:/etc/hyperledger/fabric-ca-server
+        networks:
+            - healthnet
