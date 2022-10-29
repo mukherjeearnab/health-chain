@@ -13,5 +13,5 @@ OrdererOrgs:
       # ---------------------------------------------------------------------------
       Specs:
           - Hostname: orderer
-            SANS:
-                - localhost
+            # SANS:
+            #     - localhost

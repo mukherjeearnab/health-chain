@@ -7,7 +7,7 @@ PeerOrgs:
       EnableNodeOUs: true
       Template:
           Count: 1
-          SANS:
-              - localhost
+          #   SANS:
+          #       - localhost
       Users:
           Count: 1

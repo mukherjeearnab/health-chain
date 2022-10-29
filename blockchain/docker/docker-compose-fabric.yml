@@ -11,11 +11,19 @@ services:
         extends:
             file: ./common/orderer-base.yml
             service: orderer-base
+        environment:
+            - ORDERER_GENERAL_LISTENPORT=7050
+            - ORDERER_OPERATIONS_LISTENADDRESS=orderer.blc.healthchain.com:9443
         volumes:
             - ../gen/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
             - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
             - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
             - orderer.blc.healthchain.com:/var/hyperledger/production/orderer
+        depends_on:
+            - ca.id1.local.healthchain.com
+            - ca.id2.local.healthchain.com
+            - ca.id1.state.healthchain.com
+            - ca.id1.national.healthchain.com
         ports:
             - 7050:7050
             - 9443:9443
@@ -28,8 +36,9 @@ services:
             service: cli-base
         volumes:
             - /var/run/:/host/var/run/
-            - ../gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
-            - ../gen/scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+            - ../gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/
+            - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+            - ../gen/channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
         depends_on:
             - orderer.blc.healthchain.com
             - peer0.id1.local.healthchain.com
