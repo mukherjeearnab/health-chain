@@ -1,0 +1,49 @@
+{
+    "name": "healthchain-${ORG}.healthchain.com",
+    "version": "1.0.0",
+    "client": {
+        "organization": "${ORG}.healthchain.com",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "${ORG}": {
+            "mspid": "${ORG_MSP}",
+            "peers": [
+                "peer0.${ORG}.healthchain.com"
+            ],
+            "certificateAuthorities": [
+                "ca.${ORG}.healthchain.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.${ORG}.healthchain.com": {
+            "url": "grpcs://localhost:${P0PORT}",
+            "tlsCACerts": {
+                "pem": "${PEERPEM}"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.${ORG}.healthchain.com",
+                "hostnameOverride": "peer0.${ORG}.healthchain.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.${ORG}.healthchain.com": {
+            "url": "https://localhost:${CAPORT}",
+            "caName": "ca.${ORG}.healthchain.com",
+            "tlsCACerts": {
+                "pem": "${CAPEM}"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
