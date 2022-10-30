@@ -12,6 +12,9 @@ bash ./scripts/helpers/cryptogen.sh
 echo "Generating Genesis Block"
 bash ./scripts/helpers/genesis-block.sh
 
+# echo "Copying Fabric CA Server Config Files"
+# bash ./scripts/helpers/fabric-ca.sh
+
 echo "Generating CCP Connection Profiles"
 bash ./scripts/helpers/ccp-generate.sh \
     id1.national 13132 13135 NationalMSP

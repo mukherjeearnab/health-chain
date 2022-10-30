@@ -6,11 +6,11 @@ const router = new express.Router();
 
 // User Registration Route
 router.post('/register', async (req, res) => {
-    const { Username, Affiliation } = req.body;
+    const { Username } = req.body;
     try {
         const newUser = {
             Username,
-            Affiliation,
+            Affiliation: process.env.USER_AFF,
             OrgName: process.env.ORG_NAME,
             CA: `ca.${process.env.ORG_NAME}.healthchain.com`
         };
