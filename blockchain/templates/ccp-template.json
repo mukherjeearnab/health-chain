@@ -26,11 +26,11 @@
         "peer0.${ORG}.healthchain.com": {
             "url": "grpcs://peer0.${ORG}.healthchain.com:${P0PORT}",
             "tlsCACerts": {
-                "pem": "/crypto/tlsca/tlsca.${ORG}.healthchain.com-cert.pem"
+                "path": "/crypto/tlsca/tlsca.${ORG}.healthchain.com-cert.pem"
             },
             "grpcOptions": {
                 "ssl-target-name-override": "peer0.${ORG}.healthchain.com",
-                "hostnameOverride": "peer0.${ORG}.healthchain.com"
+                "grpc.keepalive_time_ms": 10000
             }
         }
     },
@@ -39,7 +39,7 @@
             "url": "https://ca.${ORG}.healthchain.com:${CAPORT}",
             "caName": "ca.${ORG}.healthchain.com",
             "tlsCACerts": {
-                "pem": "/crypto/ca/ca.${ORG}.healthchain.com-cert.pem"
+                "path": "/crypto/ca/ca.${ORG}.healthchain.com-cert.pem"
             },
             "httpOptions": {
                 "verify": false

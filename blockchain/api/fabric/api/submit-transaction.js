@@ -20,7 +20,7 @@ module.exports = async (user, contract) => {
         await gateway.connect(ccp, {
             wallet,
             identity: Username,
-            discovery: { enabled: false, asLocalhost: false }
+            discovery: { enabled: true, asLocalhost: false }
         });
 
         // Get the network (channel) our contract is deployed to.
@@ -28,6 +28,8 @@ module.exports = async (user, contract) => {
 
         // Get the contract from the network.
         const Contract = network.getContract(Name);
+
+        console.log(network);
 
         // Submit the specified transaction.
         const payload = await Contract.submitTransaction(Function, ...Params);

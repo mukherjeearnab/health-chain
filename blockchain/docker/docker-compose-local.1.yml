@@ -66,9 +66,12 @@ services:
         environment:
             - FABRIC_CA_SERVER_CA_NAME=ca.id1.local.healthchain.com
             - FABRIC_CA_SERVER_PORT=11135
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.id1.local.healthchain.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/priv_sk
         ports:
             - "11135:11135"
         volumes:
             - ../gen/fabric-ca/id1.local.healthchain.com:/etc/hyperledger/fabric-ca-server
+            - ../gen/organizations/peerOrganizations/id1.local.healthchain.com/ca:/etc/hyperledger/fabric-ca-server-config
         networks:
             - healthnet

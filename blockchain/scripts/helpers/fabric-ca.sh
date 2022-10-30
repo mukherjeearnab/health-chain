@@ -1,5 +1,11 @@
 WORKDIR=$PWD
 
+function json_ccp {
+    sed -e "s/\${ORG}/$1/" \
+        -e "s/\${CAPORT}/$2/" \
+        ../../config/fabric-ca/fabric-ca.yml
+}
+
 cd ./gen
 
 mkdir fabric-ca
@@ -11,9 +17,20 @@ mkdir id2.local.healthchain.com
 mkdir id1.state.healthchain.com
 mkdir id1.national.healthchain.com
 
-cp ../../config/fabric-ca/fabric-ca.yml ./id1.local.healthchain.com/fabric-ca-server-config.yaml
-cp ../../config/fabric-ca/fabric-ca.yml ./id2.local.healthchain.com/fabric-ca-server-config.yaml
-cp ../../config/fabric-ca/fabric-ca.yml ./id1.state.healthchain.com/fabric-ca-server-config.yaml
-cp ../../config/fabric-ca/fabric-ca.yml ./id1.national.healthchain.com/fabric-ca-server-config.yaml
+ORG=id1.local
+CAPORT=11135
+echo "$(json_ccp $ORG $CAPORT)" >./$ORG.healthchain.com/fabric-ca-server-config.yaml
+
+ORG=id2.local
+CAPORT=11235
+echo "$(json_ccp $ORG $CAPORT)" >./$ORG.healthchain.com/fabric-ca-server-config.yaml
+
+ORG=id1.state
+CAPORT=12135
+echo "$(json_ccp $ORG $CAPORT)" >./$ORG.healthchain.com/fabric-ca-server-config.yaml
+
+ORG=id1.national
+CAPORT=13135
+echo "$(json_ccp $ORG $CAPORT)" >./$ORG.healthchain.com/fabric-ca-server-config.yaml
 
 cd $WORKDIR

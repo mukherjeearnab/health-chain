@@ -6,7 +6,7 @@ const path = require('path');
 const ccp = require('/crypto/connection-ccp.json');
 
 module.exports = async (user, contract) => {
-    const { OrgName, Username } = user;
+    const { OrgName } = user;
     const { Function, Name, Channel, Params } = contract;
 
     try {
@@ -19,8 +19,8 @@ module.exports = async (user, contract) => {
         const gateway = new Gateway();
         await gateway.connect(ccp, {
             wallet,
-            identity: Username,
-            discovery: { enabled: false, asLocalhost: false }
+            identity: 'admin',
+            discovery: { enabled: true, asLocalhost: false }
         });
 
         // Get the network (channel) our contract is deployed to.
