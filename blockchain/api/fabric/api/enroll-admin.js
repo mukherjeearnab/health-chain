@@ -1,5 +1,5 @@
 const FabricCAServices = require('fabric-ca-client');
-const { FileSystemWallet, X509WalletMixin } = require('fabric-network');
+const { Wallets } = require('fabric-network');
 const path = require('path');
 
 // Load Connection Profile
@@ -19,11 +19,11 @@ module.exports = async (organization) => {
 
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallets', `wallet_${OrgName}`);
-        const wallet = new FileSystemWallet(walletPath);
+        const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the admin user.
-        const adminExists = await wallet.exists('admin');
+        const adminExists = await wallet.get('admin');
         if (adminExists) {
             console.log('An identity for the admin user "admin" already exists in the wallet.');
             return;
@@ -31,14 +31,18 @@ module.exports = async (organization) => {
 
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
-        const identity = X509WalletMixin.createIdentity(
-            MSP,
-            enrollment.certificate,
-            enrollment.key.toBytes()
-        );
-        await wallet.import('admin', identity);
+        const identity = {
+            credentials: {
+                certificate: enrollment.certificate,
+                privateKey: enrollment.key.toBytes()
+            },
+            mspId: MSP,
+            type: 'X.509'
+        };
+
+        await wallet.put('admin', identity);
         console.log('Successfully enrolled admin user "admin" and imported it into the wallet.');
     } catch (error) {
-        console.error(`Failed to enroll admin user "admin": ${error.message}`);
+        console.error(`Failed to enroll admin user "admin": ${error}`);
     }
 };

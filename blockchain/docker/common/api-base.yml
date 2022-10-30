@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+    # Fabric API Layer
+    fabric-api:
+        build: ../../api
+        command: sh ./run.sh
