@@ -15,6 +15,23 @@ networks:
 # Example: 12120 = 'DB' of 'Layer 2' of 'ID 1' at 'State Level', 'Healthchain'
 
 services:
+    api.blc.id1.state.healthchain.com:
+        extends:
+            file: ./common/api-base.yml
+            service: fabric-api
+        environment:
+            - ORG_NAME=id1.state
+            - ORG_MSP=State1MSP
+        volumes:
+            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com:/crypto
+        ports:
+            - 12133:3000
+        depends_on:
+            - peer0.id1.state.healthchain.com
+            - ca.id1.state.healthchain.com
+        networks:
+            - healthnet
+
     peer0.id1.state.healthchain.com:
         extends:
             file: ./common/peer-base.yml
