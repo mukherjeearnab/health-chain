@@ -14,6 +14,7 @@ services:
         environment:
             - ORDERER_GENERAL_LISTENPORT=7050
             - ORDERER_OPERATIONS_LISTENADDRESS=orderer.blc.healthchain.com:9443
+            - GRPC_VERBOSITY=DEBUG
         volumes:
             - ../gen/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
             - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp

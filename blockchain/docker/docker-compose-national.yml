@@ -46,6 +46,8 @@ services:
             - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.id1.national.healthchain.com:13132
             - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.id1.national.healthchain.com:13132
             - CORE_PEER_LOCALMSPID=NationalMSP
+            - GRPC_VERBOSITY=DEBUG
+            - CORE_OPERATIONS_LISTENADDRESS=peer0.id1.national.healthchain.com:13136
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
             - ../gen/organizations/peerOrganizations/id1.national.healthchain.com/peers/peer0.id1.national.healthchain.com/msp:/etc/hyperledger/fabric/msp
@@ -53,6 +55,7 @@ services:
             - peer0.id1.national.healthchain.com:/var/hyperledger/production
         ports:
             - 13132:13132
+            - 13136:13136
         networks:
             - healthnet
 

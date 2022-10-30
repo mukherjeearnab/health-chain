@@ -1,4 +1,4 @@
-module github.com/hyperledger/fabric-samples/chaincode/marbles02/go
+module healthchain.com/chaincode
 
 go 1.12
 

@@ -2,7 +2,7 @@
     "name": "healthchain-${ORG}.healthchain.com",
     "version": "1.0.0",
     "client": {
-        "organization": "${ORG}.healthchain.com",
+        "organization": "${ORG_MSP}",
         "connection": {
             "timeout": {
                 "peer": {
@@ -13,7 +13,7 @@
     },
     "organizations": {
         "${ORG}": {
-            "mspid": "${ORG_MSP}",
+            "mspid": "${ORG_MSP}MSP",
             "peers": [
                 "peer0.${ORG}.healthchain.com"
             ],
@@ -26,7 +26,7 @@
         "peer0.${ORG}.healthchain.com": {
             "url": "grpcs://peer0.${ORG}.healthchain.com:${P0PORT}",
             "tlsCACerts": {
-                "pem": "${PEERPEM}"
+                "pem": "/crypto/tlsca/tlsca.${ORG}.healthchain.com-cert.pem"
             },
             "grpcOptions": {
                 "ssl-target-name-override": "peer0.${ORG}.healthchain.com",
@@ -39,7 +39,7 @@
             "url": "https://ca.${ORG}.healthchain.com:${CAPORT}",
             "caName": "ca.${ORG}.healthchain.com",
             "tlsCACerts": {
-                "pem": "${CAPEM}"
+                "pem": "/crypto/ca/ca.${ORG}.healthchain.com-cert.pem"
             },
             "httpOptions": {
                 "verify": false

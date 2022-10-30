@@ -7,7 +7,7 @@ PeerOrgs:
       EnableNodeOUs: true
       Template:
           Count: 1
-          #   SANS:
-          #       - localhost
+          SANS:
+              - peer0.id1.state.healthchain.com
       Users:
           Count: 1

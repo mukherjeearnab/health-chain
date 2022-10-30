@@ -46,6 +46,8 @@ services:
             - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.id2.local.healthchain.com:11232
             - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.id2.local.healthchain.com:11232
             - CORE_PEER_LOCALMSPID=Local2MSP
+            - GRPC_VERBOSITY=DEBUG
+            - CORE_OPERATIONS_LISTENADDRESS=peer0.id2.local.healthchain.com:11236
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
             - ../gen/organizations/peerOrganizations/id2.local.healthchain.com/peers/peer0.id2.local.healthchain.com/msp:/etc/hyperledger/fabric/msp
@@ -53,6 +55,7 @@ services:
             - peer0.id2.local.healthchain.com:/var/hyperledger/production
         ports:
             - 11232:11232
+            - 11236:11236
         networks:
             - healthnet
 
