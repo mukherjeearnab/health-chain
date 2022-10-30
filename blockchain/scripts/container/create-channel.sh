@@ -1,6 +1,6 @@
 CHANNEL_NAME="mainchannel"
 MAX_RETRY=10
-DELAY=20
+DELAY=10
 
 BLOCKFILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/${CHANNEL_NAME}.block
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp/tlscacerts/tlsca.blc.healthchain.com-cert.pem

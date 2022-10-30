@@ -3,7 +3,7 @@ ORG=$2
 MSP=$3
 PORT=$4
 
-DELAY=10
+DELAY=4
 
 CHANNEL_NAME="mainchannel"
 

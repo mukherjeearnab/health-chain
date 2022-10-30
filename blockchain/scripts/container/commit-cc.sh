@@ -42,3 +42,27 @@ peer lifecycle chaincode querycommitted \
     --channelID $CHANNEL_NAME --name $CHAINCODE >&log.txt
 
 cat log.txt
+
+echo "Init the Chaincode"
+# peer chaincode instantiate \
+#     -o $ORDERER --tls \
+#     --cafile $ORDERER_CA \
+#     -v $VERSION -c '{"Args":[]}' \
+#     -C $CHANNEL_NAME -n $CHAINCODE >&log.txt
+
+peer chaincode invoke \
+    -o $ORDERER --tls \
+    --cafile $ORDERER_CA -C $CHANNEL_NAME \
+    -n $CHAINCODE \
+    --peerAddresses peer0.id1.national.healthchain.com:13132 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_N \
+    --peerAddresses peer0.id1.state.healthchain.com:12132 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_S1 \
+    --peerAddresses peer0.id1.local.healthchain.com:11132 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_L1 \
+    --peerAddresses peer0.id2.local.healthchain.com:11232 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE_L2 \
+    --isInit -c '{"Args":[]}' >&log.txt
+
+# peer chaincode invoke \
+#     -o $ORDERER --tls \
+#     --cafile $ORDERER_CA -C $CHANNEL_NAME \
+#     -n $CHAINCODE --isInit -c '{"Args":["init", "a", "100", "b", "200"]}'
+
+cat log.txt
