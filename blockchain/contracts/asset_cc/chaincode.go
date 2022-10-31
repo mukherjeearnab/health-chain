@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"time"
 
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	sc "github.com/hyperledger/fabric-protos-go/peer"
@@ -189,9 +188,7 @@ func (cc *Chaincode) getAssetHistory(stub shim.ChaincodeStubInterface, params []
 		}
 
 		buffer.WriteString(", \"Timestamp\":")
-		buffer.WriteString("\"")
-		buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())
-		buffer.WriteString("\"")
+		buffer.WriteString(strconv.FormatInt(response.Timestamp.Seconds, 10))
 
 		buffer.WriteString(", \"IsDelete\":")
 		buffer.WriteString("\"")

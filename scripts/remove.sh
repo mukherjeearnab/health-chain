@@ -16,7 +16,7 @@ fi
 if [[ "$2" = "-c" ]]; then
     echo "Removing Images, Volumes and Networks as well...."
     docker image ls --format '{{.Repository}}' | grep healthchain.com | xargs docker image rm -f
-    docker image rm -f api.registry.healthchain.com:latest
+    # docker image rm -f api.registry.healthchain.com:latest
 
     # remove docker network
     docker network remove healthchain_healthnet
