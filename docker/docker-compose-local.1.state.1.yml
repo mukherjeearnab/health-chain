@@ -35,7 +35,7 @@ services:
             - MONGODB_URI=db.l1.id1.local.healthchain.com:27017
 
     api.l2.id1.local.healthchain.com:
-        image: api.l1.local.healthchain.com
+        image: api.l2.local.healthchain.com
         networks:
             - healthnet
         ports:
