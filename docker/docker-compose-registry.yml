@@ -15,13 +15,13 @@ services:
     # Network Registry Service
     db.registry.healthchain.com:
         extends:
-            file: ./common/docker-compose-db.yml
+            file: $PWD/docker/common/docker-compose-db.yml
             service: mongo
+        networks:
+            - healthnet
 
     api.registry.healthchain.com:
-        extends:
-            file: ../registry/docker-compose.yml
-            service: registry-api
+        image: api.registry.healthchain.com
         networks:
             - healthnet
         ports:

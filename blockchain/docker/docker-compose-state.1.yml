@@ -17,13 +17,13 @@ networks:
 services:
     api.blc.id1.state.healthchain.com:
         extends:
-            file: ./common/api-base.yml
+            file: $PWD/blockchain/docker/common/api-base.yml
             service: fabric-api
         environment:
             - ORG_NAME=id1.state
             - ORG_MSP=State1MSP
         volumes:
-            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com:/crypto
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id1.state.healthchain.com:/crypto
         ports:
             - 12133:3000
         depends_on:
@@ -34,7 +34,7 @@ services:
 
     peer0.id1.state.healthchain.com:
         extends:
-            file: ./common/peer-base.yml
+            file: $PWD/blockchain/docker/common/peer-base.yml
             service: peer-base
         environment:
             # Peer specific variabes
@@ -50,8 +50,8 @@ services:
             - CORE_OPERATIONS_LISTENADDRESS=peer0.id1.state.healthchain.com:12136
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
-            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/msp:/etc/hyperledger/fabric/msp
-            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/tls:/etc/hyperledger/fabric/tls
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/msp:/etc/hyperledger/fabric/msp
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id1.state.healthchain.com/peers/peer0.id1.state.healthchain.com/tls:/etc/hyperledger/fabric/tls
             - peer0.id1.state.healthchain.com:/var/hyperledger/production
         ports:
             - 12132:12132
@@ -61,7 +61,7 @@ services:
 
     ca.id1.state.healthchain.com:
         extends:
-            file: ./common/ca-base.yml
+            file: $PWD/blockchain/docker/common/ca-base.yml
             service: ca-base
         environment:
             - FABRIC_CA_SERVER_CA_NAME=ca.id1.state.healthchain.com
@@ -71,7 +71,7 @@ services:
         ports:
             - "12135:12135"
         volumes:
-            - ../gen/fabric-ca/id1.state.healthchain.com:/etc/hyperledger/fabric-ca-server
-            - ../gen/organizations/peerOrganizations/id1.state.healthchain.com/ca:/etc/hyperledger/fabric-ca-server-config
+            - $PWD/blockchain/gen/fabric-ca/id1.state.healthchain.com:/etc/hyperledger/fabric-ca-server
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id1.state.healthchain.com/ca:/etc/hyperledger/fabric-ca-server-config
         networks:
             - healthnet

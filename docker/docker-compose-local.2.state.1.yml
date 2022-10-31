@@ -16,13 +16,15 @@ services:
     ## Local Service 2 (State-1)
     db.l1.id2.local.healthchain.com:
         extends:
-            file: ./common/docker-compose-db.yml
+            file: $PWD/docker/common/docker-compose-db.yml
             service: mongo
+        networks:
+            - healthnet
+        volumes:
+            - $PWD/generated/db.l1.id2.local.healthchain.com:/data/db
 
     api.l1.id2.local.healthchain.com:
-        extends:
-            file: ../local/docker-compose.yml
-            service: l1-api
+        image: api.l1.local.healthchain.com
         networks:
             - healthnet
         ports:
@@ -33,9 +35,7 @@ services:
             - MONGODB_URI=db.l1.id2.local.healthchain.com:27017
 
     api.l2.id2.local.healthchain.com:
-        extends:
-            file: ../local/docker-compose.yml
-            service: l2-api
+        image: api.l2.local.healthchain.com
         networks:
             - healthnet
         ports:

@@ -15,13 +15,15 @@ services:
     # National Level Services
     db.l1.id1.national.healthchain.com:
         extends:
-            file: ./common/docker-compose-db.yml
+            file: $PWD/docker/common/docker-compose-db.yml
             service: mongo
+        networks:
+            - healthnet
+        volumes:
+            - $PWD/generated/db.l1.id1.national.healthchain.com:/data/db
 
     api.l1.id1.national.healthchain.com:
-        extends:
-            file: ../national/docker-compose.yml
-            service: l1-api
+        image: api.l1.national.healthchain.com
         networks:
             - healthnet
         ports:
@@ -32,9 +34,7 @@ services:
             - MONGODB_URI=db.l1.id1.national.healthchain.com:27017
 
     api.l2.id1.national.healthchain.com:
-        extends:
-            file: ../national/docker-compose.yml
-            service: l2-api
+        image: api.l2.national.healthchain.com
         networks:
             - healthnet
         ports:

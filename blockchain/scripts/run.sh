@@ -1,11 +1,5 @@
 echo "Orchestrating the Blockchain Network...."
 bash ./scripts/helpers/network-up.sh
 
-echo "Creating Communication Channel for Org Peers"
-bash ./scripts/helpers/create-channel.sh
-
-echo "Joining Org Peers to Communication Channel"
-bash ./scripts/helpers/join-channel.sh
-
-echo "Installing Smart Contracts (Chaincodes)"
-bash ./scripts/helpers/install-cc.sh
+echo "Finishing setup of blockchain network...."
+bash ./scripts/setup.sh

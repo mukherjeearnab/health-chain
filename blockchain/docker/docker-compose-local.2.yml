@@ -17,13 +17,13 @@ networks:
 services:
     api.blc.id2.local.healthchain.com:
         extends:
-            file: ./common/api-base.yml
+            file: $PWD/blockchain/docker/common/api-base.yml
             service: fabric-api
         environment:
             - ORG_NAME=id2.local
             - ORG_MSP=Local2MSP
         volumes:
-            - ../gen/organizations/peerOrganizations/id2.local.healthchain.com:/crypto
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id2.local.healthchain.com:/crypto
         ports:
             - 11233:3000
         depends_on:
@@ -34,7 +34,7 @@ services:
 
     peer0.id2.local.healthchain.com:
         extends:
-            file: ./common/peer-base.yml
+            file: $PWD/blockchain/docker/common/peer-base.yml
             service: peer-base
         environment:
             # Peer specific variabes
@@ -50,8 +50,8 @@ services:
             - CORE_OPERATIONS_LISTENADDRESS=peer0.id2.local.healthchain.com:11236
         volumes:
             - /var/run/docker.sock:/host/var/run/docker.sock
-            - ../gen/organizations/peerOrganizations/id2.local.healthchain.com/peers/peer0.id2.local.healthchain.com/msp:/etc/hyperledger/fabric/msp
-            - ../gen/organizations/peerOrganizations/id2.local.healthchain.com/peers/peer0.id2.local.healthchain.com/tls:/etc/hyperledger/fabric/tls
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id2.local.healthchain.com/peers/peer0.id2.local.healthchain.com/msp:/etc/hyperledger/fabric/msp
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id2.local.healthchain.com/peers/peer0.id2.local.healthchain.com/tls:/etc/hyperledger/fabric/tls
             - peer0.id2.local.healthchain.com:/var/hyperledger/production
         ports:
             - 11232:11232
@@ -61,7 +61,7 @@ services:
 
     ca.id2.local.healthchain.com:
         extends:
-            file: ./common/ca-base.yml
+            file: $PWD/blockchain/docker/common/ca-base.yml
             service: ca-base
         environment:
             - FABRIC_CA_SERVER_CA_NAME=ca.id2.local.healthchain.com
@@ -71,7 +71,7 @@ services:
         ports:
             - "11235:11235"
         volumes:
-            - ../gen/fabric-ca/id2.local.healthchain.com:/etc/hyperledger/fabric-ca-server
-            - ../gen/organizations/peerOrganizations/id2.local.healthchain.com/ca:/etc/hyperledger/fabric-ca-server-config
+            - $PWD/blockchain/gen/fabric-ca/id2.local.healthchain.com:/etc/hyperledger/fabric-ca-server
+            - $PWD/blockchain/gen/organizations/peerOrganizations/id2.local.healthchain.com/ca:/etc/hyperledger/fabric-ca-server-config
         networks:
             - healthnet

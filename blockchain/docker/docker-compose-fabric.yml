@@ -9,16 +9,16 @@ networks:
 services:
     orderer.blc.healthchain.com:
         extends:
-            file: ./common/orderer-base.yml
+            file: $PWD/blockchain/docker/common/orderer-base.yml
             service: orderer-base
         environment:
             - ORDERER_GENERAL_LISTENPORT=7050
             - ORDERER_OPERATIONS_LISTENADDRESS=orderer.blc.healthchain.com:9443
             - GRPC_VERBOSITY=DEBUG
         volumes:
-            - ../gen/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-            - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
-            - ../gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
+            - $PWD/blockchain/gen/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+            - $PWD/blockchain/gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp:/var/hyperledger/orderer/msp
+            - $PWD/blockchain/gen/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/tls/:/var/hyperledger/orderer/tls
             - orderer.blc.healthchain.com:/var/hyperledger/production/orderer
         depends_on:
             - ca.id1.local.healthchain.com
@@ -33,7 +33,7 @@ services:
 
     cli.blc.healthchain.com:
         extends:
-            file: ./common/cli-base.yml
+            file: $PWD/blockchain/docker/common/cli-base.yml
             service: cli-base
         environment:
             - CORE_PEER_ID=cli
@@ -46,10 +46,10 @@ services:
             - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/peerOrganizations/id1.national.healthchain.com/users/Admin@id1.national.healthchain.com/msp
         volumes:
             - /var/run/:/host/var/run/
-            - ../gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/
-            - ../scripts/container:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
-            - ../gen/channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
-            - ../contracts:/usr/local/go/src/
+            - $PWD/blockchain/gen/organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/
+            - $PWD/blockchain/scripts/container:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+            - $PWD/blockchain/gen/channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/
+            - $PWD/blockchain/contracts:/usr/local/go/src/
         depends_on:
             - orderer.blc.healthchain.com
             - peer0.id1.local.healthchain.com
