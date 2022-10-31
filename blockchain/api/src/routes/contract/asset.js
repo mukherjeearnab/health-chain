@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 
 router.get('/get/:type/:id', async (req, res) => {
     try {
-        const reply = await AssetContract.GetAsset(
+        const { exec, result } = await AssetContract.GetAsset(
             {
                 Username: req.headers['x-access-username'],
                 Affiliation: process.env.USER_AFF,
@@ -21,9 +21,10 @@ router.get('/get/:type/:id', async (req, res) => {
             [req.params.type, req.params.id]
         );
 
-        res.status(200).send(reply);
+        if (exec === true) res.status(200).send(result);
+        else res.status(404).send({ message: 'Asset NOT found!' });
     } catch (error) {
-        res.status(404).send({ message: 'Asset NOT found!' });
+        res.status(500).send({ message: `SERVER ERROR! ${error.message}` });
     }
 });
 
@@ -31,7 +32,7 @@ router.post('/set', async (req, res) => {
     const { Type, ID, Hash } = req.body;
 
     try {
-        const reply = await AssetContract.SetAsset(
+        const { exec, result } = await AssetContract.SetAsset(
             {
                 Username: req.headers['x-access-username'],
                 Affiliation: process.env.USER_AFF,
@@ -41,15 +42,16 @@ router.post('/set', async (req, res) => {
             [Type, ID, Hash]
         );
 
-        res.status(200).send({ reply, message: 'Asset successfully set.' });
+        if (exec === true) res.status(200).send({ result, message: 'Asset successfully set.' });
+        else throw new Error('Chaincode Error! Check API Server logs.');
     } catch (error) {
-        res.status(500).send({ message: 'Asset NOT Set!' });
+        res.status(500).send({ message: `SERVER ERROR! ${error.message}` });
     }
 });
 
 router.get('/history/:type/:id', async (req, res) => {
     try {
-        const reply = await AssetContract.GetAssetHistory(
+        const { exec, result } = await AssetContract.GetAssetHistory(
             {
                 Username: req.headers['x-access-username'],
                 Affiliation: process.env.USER_AFF,
@@ -59,9 +61,10 @@ router.get('/history/:type/:id', async (req, res) => {
             [req.params.type, req.params.id]
         );
 
-        res.status(200).send(reply);
+        if (exec === true) res.status(200).send(result);
+        else res.status(404).send({ message: 'Asset NOT found!' });
     } catch (error) {
-        res.status(404).send({ message: 'Asset NOT found!' });
+        res.status(500).send({ message: `SERVER ERROR! ${error.message}` });
     }
 });
 

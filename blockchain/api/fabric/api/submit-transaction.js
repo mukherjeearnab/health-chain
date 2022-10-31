@@ -29,7 +29,8 @@ module.exports = async (user, contract) => {
         // Get the contract from the network.
         const Contract = network.getContract(Name);
 
-        console.log(network);
+        console.log(`Submitting Transaction to ${Name} calling ${Function}`);
+        console.log(`Params ${Params}`);
 
         // Submit the specified transaction.
         const payload = await Contract.submitTransaction(Function, ...Params);
@@ -38,11 +39,11 @@ module.exports = async (user, contract) => {
         gateway.disconnect();
 
         // Return payload (if any)
-        if (payload) return JSON.parse(payload.toString());
+        if (payload) return { exec: true, result: JSON.parse(payload.toString()) };
     } catch (error) {
-        console.error('Failed to Submit Transaction.', error);
+        console.error('Failed to Submit Transaction.', error.messsage);
     }
 
     // If all fails, return null
-    return null;
+    return { exec: false, result: null };
 };

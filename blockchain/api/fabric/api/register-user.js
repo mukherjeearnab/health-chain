@@ -6,6 +6,7 @@ const path = require('path');
 // eslint-disable-next-line import/no-unresolved, import/no-absolute-path
 const ccp = require('/crypto/connection-ccp.json');
 
+// function returns true on successful registration, else false
 module.exports = async (user) => {
     const { OrgName, Affiliation, Username, CA } = user;
     try {
@@ -26,16 +27,25 @@ module.exports = async (user) => {
         // Check to see if we've already enrolled the user
         const userIdentity = await wallet.get(Username);
         if (userIdentity) {
-            console.log(`An identity for the user ${Username} already exists in the wallet`);
-            return;
+            const message = `An identity for the user ${Username} already exists in the wallet`;
+            console.log(message);
+            return {
+                exec: false,
+                message
+            };
         }
 
         // Must use an admin to register a new user
         const adminIdentity = await wallet.get('admin');
         if (!adminIdentity) {
-            console.log('An identity for the admin user does not exist in the wallet');
-            console.log('Enroll the admin user before retrying');
-            return;
+            const message =
+                'Admin user does not exist in the wallet! ' +
+                'Enroll the admin user before retrying.';
+            console.log(message);
+            return {
+                exec: false,
+                message
+            };
         }
 
         // build a user object for authenticating with the CA
@@ -69,8 +79,20 @@ module.exports = async (user) => {
 
         await wallet.put(Username, x509Identity);
 
-        console.log(`Added user <${Username}>`);
+        const message = `Added user <${Username}>`;
+        console.log(message);
+        return {
+            exec: true,
+            message
+        };
     } catch (error) {
         console.error(`Failed to enroll user <${Username}>: ${error.message}`);
     }
+
+    const message = `Failed to enroll user <${Username}>`;
+    console.log(message);
+    return {
+        exec: false,
+        message
+    };
 };

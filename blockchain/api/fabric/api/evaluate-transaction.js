@@ -6,7 +6,7 @@ const path = require('path');
 const ccp = require('/crypto/connection-ccp.json');
 
 module.exports = async (user, contract) => {
-    const { OrgName } = user;
+    const { OrgName, Username } = user;
     const { Function, Name, Channel, Params } = contract;
 
     try {
@@ -19,7 +19,7 @@ module.exports = async (user, contract) => {
         const gateway = new Gateway();
         await gateway.connect(ccp, {
             wallet,
-            identity: 'admin',
+            identity: Username,
             discovery: { enabled: true, asLocalhost: false }
         });
 
@@ -29,6 +29,9 @@ module.exports = async (user, contract) => {
         // Get the contract from the network.
         const Contract = network.getContract(Name);
 
+        console.log(`Evaluating Transaction to ${Name} calling ${Function}`);
+        console.log(`Params ${Params}`);
+
         // Evaluate the specified transaction.
         const payload = await Contract.evaluateTransaction(Function, ...Params);
 
@@ -36,11 +39,11 @@ module.exports = async (user, contract) => {
         gateway.disconnect();
 
         // Return payload (if any)
-        if (payload) return JSON.parse(payload.toString());
+        if (payload) return { exec: true, result: JSON.parse(payload.toString()) };
     } catch (error) {
-        console.error('Failed to Evaluate Transaction.', error);
+        console.error('Failed to Evaluate Transaction.', error.message);
     }
 
     // If all fails, return null
-    return null;
+    return { exec: false, result: null };
 };

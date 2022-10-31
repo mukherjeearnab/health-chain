@@ -8,17 +8,7 @@ module.exports = async (user, params) => {
         Params: params
     };
 
-    try {
-        const reply = await FabricAPI.Contract.EvaluateTransaction(user, contract);
+    const reply = await FabricAPI.Contract.EvaluateTransaction(user, contract);
 
-        return reply;
-    } catch (error) {
-        console.error(
-            `Failed to execute ${contract.Function} in ${contract.Name} in ${contract.Channel}.`,
-            error.message
-        );
-    }
-
-    // if all fails, return null
-    return null;
+    return reply;
 };

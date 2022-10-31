@@ -16,15 +16,17 @@ router.post('/register', async (req, res) => {
         };
 
         // Create Wallet Identity for the Username
-        await FabricAPI.Account.RegisterUser(newUser);
+        const { exec, message } = await FabricAPI.Account.RegisterUser(newUser);
 
-        res.status(200).send({
-            message: 'User registration Successful!'
-        });
+        if (exec === true)
+            res.status(200).send({
+                message
+            });
+        else throw new Error(message);
     } catch (error) {
         console.log(error);
         res.status(500).send({
-            message: 'Server Error! User registration failed!'
+            message: `Server Error! ${error.message}`
         });
     }
 });
