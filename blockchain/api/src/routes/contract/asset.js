@@ -1,4 +1,5 @@
 const express = require('express');
+const sha256 = require('sha256');
 
 const AssetContract = require('../../../fabric/contracts/asset_cc');
 
@@ -39,7 +40,7 @@ router.post('/set', async (req, res) => {
                 OrgName: process.env.ORG_NAME,
                 CA: `ca.${process.env.ORG_NAME}.healthchain.com`
             },
-            [Type, ID, Hash]
+            [Type, ID, sha256(Hash)]
         );
 
         if (exec === true) res.status(200).send({ result, message: 'Asset successfully set.' });

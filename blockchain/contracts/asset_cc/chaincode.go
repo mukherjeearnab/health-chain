@@ -19,7 +19,7 @@ type Chaincode struct {
 type assetStruct struct {
 	Type string `json:"Type"`
 	ID   string `json:"ID"`
-	Hash string `json:"Name"`
+	Hash string `json:"Hash"`
 }
 
 // Init function.
