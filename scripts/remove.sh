@@ -1,5 +1,6 @@
 if [[ "$1" == "-s" || "$1" == "-a" ]]; then
     # remove containers
+    echo "Removing HealthChain Federated Services Components...."
     docker ps -a --format '{{.Names}}' | grep healthchain_api.l | xargs docker rm -f
     docker ps -a --format '{{.Names}}' | grep healthchain_db | xargs docker rm -f
     docker ps -a --format '{{.Names}}' | grep healthchain_api.reg | xargs docker rm -f
