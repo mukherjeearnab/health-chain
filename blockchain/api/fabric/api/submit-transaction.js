@@ -9,6 +9,9 @@ module.exports = async (user, contract) => {
     const { OrgName, Username } = user;
     const { Function, Name, Channel, Params } = contract;
 
+    console.log(`Submitting Transaction to ${Name} calling ${Function}`);
+    console.log('Params ', Params);
+
     try {
         // Create a new file system based wallet for managing identities.
         const walletPath = path.join(process.cwd(), 'wallets', `wallet_${OrgName}`);
@@ -29,9 +32,6 @@ module.exports = async (user, contract) => {
         // Get the contract from the network.
         const Contract = network.getContract(Name);
 
-        console.log(`Submitting Transaction to ${Name} calling ${Function}`);
-        console.log(`Params ${Params}`);
-
         // Submit the specified transaction.
         const payload = await Contract.submitTransaction(Function, ...Params);
 
@@ -41,7 +41,7 @@ module.exports = async (user, contract) => {
         // Return payload (if any)
         if (payload) return { exec: true, result: JSON.parse(payload.toString()) };
     } catch (error) {
-        console.error('Failed to Submit Transaction.', error.messsage);
+        console.error('Failed to Submit Transaction.', error);
     }
 
     // If all fails, return null
