@@ -33,6 +33,7 @@ services:
             - db.l1.id1.local.healthchain.com
         environment:
             - MONGODB_URI=db.l1.id1.local.healthchain.com:27017
+            - NODE_PREFIX=id1.local
 
     api.l2.id1.local.healthchain.com:
         image: api.l2.local.healthchain.com
