@@ -118,7 +118,7 @@ func (cc *Chaincode) getAsset(stub shim.ChaincodeStubInterface, params []string)
 		jsonResp := "{\"Error\":\"Failed to get state for " + params[0] + "\"}"
 		return shim.Error(jsonResp)
 	} else if assetAsBytes == nil {
-		jsonResp := "{\"Error\":\"Patient does not exist!\"}"
+		jsonResp := "{\"Error\":\"Asset does not exist!\"}"
 		return shim.Error(jsonResp)
 	}
 
