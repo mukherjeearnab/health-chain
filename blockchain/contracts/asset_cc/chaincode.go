@@ -191,9 +191,7 @@ func (cc *Chaincode) getAssetHistory(stub shim.ChaincodeStubInterface, params []
 		buffer.WriteString(strconv.FormatInt(response.Timestamp.Seconds, 10))
 
 		buffer.WriteString(", \"IsDelete\":")
-		buffer.WriteString("\"")
 		buffer.WriteString(strconv.FormatBool(response.IsDelete))
-		buffer.WriteString("\"")
 
 		buffer.WriteString("}")
 		bArrayMemberAlreadyWritten = true
