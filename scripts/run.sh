@@ -1,5 +1,8 @@
 WORKDIR=$PWD
 
+echo "Setting up docker-compose"
+bash ./scripts/setup-docker-compose.sh
+
 echo "Preparing Blockchain Config Files...."
 cd blockchain
 sudo bash ./scripts/generate.sh
