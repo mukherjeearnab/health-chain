@@ -14,7 +14,7 @@ CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/organ
 CORE_PEER_ADDRESS=$PEER.$ORG.healthchain.com:$PORT
 
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp/tlscacerts/tlsca.blc.healthchain.com-cert.pem
-ORDERER=orderer.blc.healthchain.com:7050
+ORDERER=orderer.blc.healthchain.com:14132
 CHANNEL_NAME="mainchannel"
 
 echo "Adding Anchor Peer with details $ORG $MSP $PORT"

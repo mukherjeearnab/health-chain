@@ -12,7 +12,7 @@ services:
             file: $PWD/blockchain/docker/common/orderer-base.yml
             service: orderer-base
         environment:
-            - ORDERER_GENERAL_LISTENPORT=7050
+            - ORDERER_GENERAL_LISTENPORT=14132
             - ORDERER_OPERATIONS_LISTENADDRESS=orderer.blc.healthchain.com:9443
             - GRPC_VERBOSITY=DEBUG
         volumes:
@@ -26,7 +26,7 @@ services:
             - ca.id1.state.healthchain.com
             - ca.id1.national.healthchain.com
         ports:
-            - 7050:7050
+            - 14132:14132
             - 9443:9443
         networks:
             - healthnet

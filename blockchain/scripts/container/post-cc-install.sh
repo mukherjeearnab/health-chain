@@ -24,11 +24,11 @@ echo "Found Chaincode with Package: $PACKAGE_ID"
 
 echo "Approve Chaincode"
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations/ordererOrganizations/blc.healthchain.com/orderers/orderer.blc.healthchain.com/msp/tlscacerts/tlsca.blc.healthchain.com-cert.pem
-ORDERER=orderer.blc.healthchain.com:7050
+ORDERER=orderer.blc.healthchain.com:14132
 CHANNEL_NAME="mainchannel"
 
 peer lifecycle chaincode approveformyorg \
-    -o orderer.blc.healthchain.com:7050 --tls --cafile $ORDERER_CA \
+    -o orderer.blc.healthchain.com:14132 --tls --cafile $ORDERER_CA \
     --channelID $CHANNEL_NAME --name $CHAINCODE \
     --version $VERSION --package-id $PACKAGE_ID \
     --sequence 1 --init-required >&log.txt

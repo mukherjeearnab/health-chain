@@ -18,7 +18,7 @@ echo "Creating channel ${CHANNEL_NAME}, and adding $CORE_PEER_ADDRESS with MSP_I
 sleep $DELAY
 
 # Poll in case the raft leader is not set yet
-peer channel create -o orderer.blc.healthchain.com:7050 \
+peer channel create -o orderer.blc.healthchain.com:14132 \
     -c $CHANNEL_NAME \
     --ordererTLSHostnameOverride orderer.blc.healthchain.com \
     -f ./channel-artifacts/${CHANNEL_NAME}.tx \
