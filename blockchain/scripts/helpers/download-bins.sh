@@ -1,9 +1,15 @@
-wget https://github.com/hyperledger/fabric/releases/download/v2.2.0/hyperledger-fabric-linux-amd64-2.2.0.tar.gz -P gen
+if [ ! -f ./bin/hyper*.tar.gz ]; then
+    echo "Downloading Fabric Binaries...."
+    wget https://github.com/hyperledger/fabric/releases/download/v2.2.0/hyperledger-fabric-linux-amd64-2.2.0.tar.gz -P bin
 
-# wget http://localhost:3000/hyperledger-fabric-linux-amd64-2.2.0.tar.gz -P gen
+    # wget http://localhost:3000/hyperledger-fabric-linux-amd64-2.2.0.tar.gz -P gen
 
-tar -xzvf ./gen/hyper*.tar.gz --directory ./gen/
+    tar -xzvf ./bin/hyper*.tar.gz --directory ./bin/
 
-chmod +x ./gen/bin/*
+    chmod +x ./bin/bin/*
 
-ls -la ./gen/bin
+else
+    echo "Fabric Binaries already available. Skipping Download...."
+fi
+
+ls -la ./bin/bin

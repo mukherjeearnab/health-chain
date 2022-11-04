@@ -13,12 +13,12 @@ mkdir channel-artifacts
 
 cd ..
 
-./gen/bin/configtxgen -configPath ./gen \
+./bin/bin/configtxgen -configPath ./gen \
     -profile HealthChainOrdererGenesis \
     -channelID system-channel \
     -outputBlock ./gen/system-genesis-block/genesis.block
 
-./gen/bin/configtxgen -configPath ./gen \
+./bin/bin/configtxgen -configPath ./gen \
     -profile HealthChainChannel \
     -outputCreateChannelTx ./gen/channel-artifacts/${CHANNEL_NAME}.tx \
     -channelID $CHANNEL_NAME

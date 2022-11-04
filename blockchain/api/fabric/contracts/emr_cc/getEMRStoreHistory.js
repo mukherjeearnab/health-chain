@@ -2,9 +2,9 @@ const FabricAPI = require('../../api');
 
 module.exports = async (user, params) => {
     const contract = {
-        Name: 'asset_cc',
+        Name: 'emr_cc',
         Channel: 'mainchannel',
-        Function: 'getAsset',
+        Function: 'getEMRStoreHistory',
         Params: params
     };
 
