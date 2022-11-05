@@ -3,7 +3,7 @@ const HTTP = require('../helpers/modules/http');
 module.exports = async () => {
     const node = {
         ID: process.env.NODE_ID,
-        ConnectionPrefix: process.env.NODE_PREFIX,
+        ConnectionPrefix: `${process.env.NODE_PREFIX}.healthchain.com`,
         Name: process.env.NODE_NAME,
         State: process.env.NODE_STATE_ID
     };

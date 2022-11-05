@@ -43,7 +43,7 @@ services:
         environment:
             - L1_API=api.l1.id1.national.healthchain.com:3000
             - NODE_ID=id1
-            - NODE_PREFIX=id1.national.healthchain.com
+            - NODE_PREFIX=id1.national
             - NODE_NAME=National
             - REGISTRY_API=api.registry.healthchain.com:3000
         depends_on:

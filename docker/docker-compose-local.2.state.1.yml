@@ -44,7 +44,7 @@ services:
         environment:
             - L1_API=api.l1.id2.local.healthchain.com:3000
             - NODE_ID=id2
-            - NODE_PREFIX=id2.local.healthchain.com
+            - NODE_PREFIX=id2.local
             - NODE_NAME=Hospital 2 State 1
             - NODE_STATE_ID=id1
             - REGISTRY_API=api.registry.healthchain.com:3000
