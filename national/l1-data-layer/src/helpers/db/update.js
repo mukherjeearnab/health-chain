@@ -1,4 +1,4 @@
-const ObjectIntegrity = require('../integrity');
+// const ObjectIntegrity = require('../integrity');
 
 module.exports = async (_id, object, schemaName) => {
     try {
@@ -13,9 +13,9 @@ module.exports = async (_id, object, schemaName) => {
         // Update the object with the given object '_id'
         const doc = await Schema.updateOne({ _id }, object);
 
-        const integrity = await Schema.find({ _id });
-        console.log('Recording Object Integriy.');
-        await ObjectIntegrity.Set(schemaName, _id, JSON.stringify(integrity));
+        // const integrity = await Schema.find({ _id });
+        // console.log('Recording Object Integriy.');
+        // await ObjectIntegrity.Set(schemaName, _id, JSON.stringify(integrity));
 
         console.log(`Updating document ${doc} with _id ${_id} in schema: ${schemaName}.`);
 
