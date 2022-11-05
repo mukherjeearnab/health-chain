@@ -1,4 +1,5 @@
 const { EMR, EHR } = require('../../../data');
+const EMRIntegrity = require('../../../data/integrity');
 
 module.exports = async (AadhaarID, Record) => {
     // check if the object exists (if not exits create record)
@@ -20,6 +21,13 @@ module.exports = async (AadhaarID, Record) => {
 
     // create the object
     const reply = await EMR.Update(object._id, object);
+
+    // get updated records to add integrity check
+    const update = await EMR.Read(AadhaarID);
+    const emr = update.MedicalRecords.pop();
+
+    console.log('Recording EMR Integriy.');
+    await EMRIntegrity.AddEMR(AadhaarID, process.env.NODE_ID, JSON.stringify(emr));
 
     // if all goes well, send this LocalID to State Node
     const ehr = await EHR.AddLocal(AadhaarID, process.env.NODE_ID);
