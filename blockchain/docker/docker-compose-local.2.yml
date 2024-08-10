@@ -15,6 +15,15 @@ networks:
 # Example: 12120 = 'DB' of 'Layer 2' of 'ID 1' at 'State Level', 'Healthchain'
 
 services:
+    db.blc.id2.local.healthchain.com:
+        extends:
+        file: $PWD/docker/common/api-auth-db.yml
+        service: mongo
+        networks:
+            - healthnet
+        volumes:
+            - $PWD/generated/db.blc.id2.local.healthchain.com:/data/db
+
     api.blc.id2.local.healthchain.com:
         extends:
             file: $PWD/blockchain/docker/common/api-base.yml
@@ -22,6 +31,7 @@ services:
         environment:
             - ORG_NAME=id2.local
             - ORG_MSP=Local2MSP
+            - MONGODB_URI=db.blc.id2.local.healthchain.com:27017
         volumes:
             - $PWD/blockchain/gen/organizations/peerOrganizations/id2.local.healthchain.com:/crypto
         ports:
@@ -31,6 +41,8 @@ services:
             - ca.id2.local.healthchain.com
         networks:
             - healthnet
+        links:
+            - db.blc.id2.local.healthchain.com
 
     peer0.id2.local.healthchain.com:
         extends:
