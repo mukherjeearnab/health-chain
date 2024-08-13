@@ -5,7 +5,5 @@ console.log('Connecting MongoDB @', connectionString);
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
     useUnifiedTopology: true
 });

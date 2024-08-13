@@ -26,10 +26,10 @@ router.post('/create', async (req, res) => {
 // fetch a record object from the database
 router.get('/get/:id', async (req, res) => {
     // obtain the AadhaarID object from the params
-    const Username = req.params.id;
+    const username = req.params.id;
 
     try {
-        const reply = await DB.Read({ Username }, SchemaName);
+        const reply = await DB.Read({ username }, SchemaName);
 
         if (reply) {
             // if length of reply is 0, account not found
