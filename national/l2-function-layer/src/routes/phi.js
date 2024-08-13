@@ -4,7 +4,7 @@ const Functions = require('../helpers/functions');
 const router = new express.Router();
 
 // get
-router.get('/get/:id', async (req, res) => {
+router.get('/get/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
 
@@ -19,7 +19,7 @@ router.get('/get/:id', async (req, res) => {
 });
 
 // assemble
-router.get('/assemble/:id', async (req, res) => {
+router.get('/assemble/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
 
@@ -34,7 +34,7 @@ router.get('/assemble/:id', async (req, res) => {
 });
 
 // create
-router.post('/create', async (req, res) => {
+router.post('/create', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the record object from the body of the request
     const object = req.body;
 
@@ -49,7 +49,7 @@ router.post('/create', async (req, res) => {
 });
 
 // update
-router.post('/update/:id', async (req, res) => {
+router.post('/update/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
     // obtain the updated object from the body of the request
@@ -66,7 +66,7 @@ router.post('/update/:id', async (req, res) => {
 });
 
 // create
-router.post('/add-state/:id', async (req, res) => {
+router.post('/add-state/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
     // obtain the updated object from the body of the request

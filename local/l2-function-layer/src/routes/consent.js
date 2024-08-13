@@ -4,7 +4,7 @@ const Functions = require('../helpers/functions');
 const router = new express.Router();
 
 // allow consent
-router.post('/allow/:id', async (req, res) => {
+router.post('/allow/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the ID of the PHI
     const AadhaarID = req.params.id;
 
@@ -21,7 +21,7 @@ router.post('/allow/:id', async (req, res) => {
 });
 
 // revoke consent
-router.post('/revoke/:id', async (req, res) => {
+router.post('/revoke/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the ID of the PHI
     const AadhaarID = req.params.id;
 
@@ -38,7 +38,7 @@ router.post('/revoke/:id', async (req, res) => {
 });
 
 // check consent
-router.post('/check/:id', async (req, res) => {
+router.post('/check/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the ID of the PHI
     const AadhaarID = req.params.id;
 
@@ -55,7 +55,7 @@ router.post('/check/:id', async (req, res) => {
 });
 
 // request consent
-router.post('/request/:id', async (req, res) => {
+router.post('/request/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the ID of the PHI
     const AadhaarID = req.params.id;
 

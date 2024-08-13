@@ -17,7 +17,7 @@ networks:
 services:
     db.blc.id1.local.healthchain.com:
         extends:
-            file: $PWD/docker/common/api-auth-db.yml
+            file: $PWD/blockchain/docker/common/api-auth-db.yml
             service: mongo
         networks:
             - healthnet

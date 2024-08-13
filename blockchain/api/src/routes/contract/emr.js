@@ -1,6 +1,8 @@
 const express = require('express');
 const sha256 = require('sha256');
 
+const JWTmiddleware = require('../../helpers/jwtVerifyMiddleware');
+
 const EMRStoreContract = require('../../../fabric/contracts/emr_cc');
 
 const router = new express.Router();
@@ -10,11 +12,11 @@ router.get('/', async (req, res) => {
     res.status(200).send(`asset_cc route`);
 });
 
-router.get('/get/:HealthID/:LocalID', async (req, res) => {
+router.get('/get/:HealthID/:LocalID', JWTmiddleware, async (req, res) => {
     try {
         const { exec, result } = await EMRStoreContract.GetEMRStore(
             {
-                Username: req.headers['x-access-username'],
+                Username: req.user.Username,
                 Affiliation: process.env.USER_AFF,
                 OrgName: process.env.ORG_NAME,
                 CA: `ca.${process.env.ORG_NAME}.healthchain.com`
@@ -29,13 +31,13 @@ router.get('/get/:HealthID/:LocalID', async (req, res) => {
     }
 });
 
-router.post('/add-emr', async (req, res) => {
+router.post('/add-emr', JWTmiddleware, async (req, res) => {
     const { HealthID, LocalID, EMR } = req.body;
 
     try {
         const { exec, result } = await EMRStoreContract.AddEMR(
             {
-                Username: req.headers['x-access-username'],
+                Username: req.user.Username,
                 Affiliation: process.env.USER_AFF,
                 OrgName: process.env.ORG_NAME,
                 CA: `ca.${process.env.ORG_NAME}.healthchain.com`
@@ -50,11 +52,11 @@ router.post('/add-emr', async (req, res) => {
     }
 });
 
-router.get('/history/:HealthID/:LocalID', async (req, res) => {
+router.get('/history/:HealthID/:LocalID', JWTmiddleware, async (req, res) => {
     try {
         const { exec, result } = await EMRStoreContract.GetEMRStoreHistory(
             {
-                Username: req.headers['x-access-username'],
+                Username: req.user.Username,
                 Affiliation: process.env.USER_AFF,
                 OrgName: process.env.ORG_NAME,
                 CA: `ca.${process.env.ORG_NAME}.healthchain.com`

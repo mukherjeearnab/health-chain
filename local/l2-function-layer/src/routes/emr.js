@@ -4,7 +4,7 @@ const Functions = require('../helpers/functions');
 const router = new express.Router();
 
 // get
-router.get('/get/:id', async (req, res) => {
+router.get('/get/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
 
@@ -19,7 +19,7 @@ router.get('/get/:id', async (req, res) => {
 });
 
 // add local
-router.post('/add-record/:id', async (req, res) => {
+router.post('/add-record/:id', Functions.Stateful.HIE.Middleware, async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
     // obtain the updated object from the body of the request
