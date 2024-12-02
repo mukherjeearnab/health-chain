@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
-const config = require('./config');
+const jwt = require("jsonwebtoken");
+const config = require("./config");
 
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
     // retrieve the token from the headers
-    const token = req.headers['x-access-token'];
+    const token = req.headers["x-access-token"];
 
     // if a token is retrieved, verify it
     if (token) {
@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
             token,
             config.secretKey,
             {
-                algorithm: config.algorithm
+                algorithm: config.algorithm,
             },
 
             // eslint-disable-next-line consistent-return
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
                 // if an error is encountered, this means the token is invalid
                 if (err) {
                     return res.status(401).send({
-                        message: 'Unauthorised access!'
+                        message: "Unauthorised access!",
                     });
                 }
 
@@ -31,8 +31,9 @@ module.exports = (req, res, next) => {
         );
     } else {
         // if no token is retrieved, send 403 because token is required for authorization
-        return res.status(403).send({
-            message: 'Forbidden access!'
-        });
+        // return res.status(403).send({
+        //     message: 'Forbidden access!'
+        // });
+        next();
     }
 };
