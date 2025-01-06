@@ -39,7 +39,7 @@ services:
         networks:
             - healthnet
         ports:
-            - "13121:3000"
+            - "23121:3000"
         environment:
             - L1_API=api.l1.id1.national.healthchain.com:3000
             - NODE_ID=id1
