@@ -1,6 +1,6 @@
 const { PHI, EHR, EMR } = require('../../../data');
 
-module.exports = async (AadhaarID) => {
+module.exports = async (AadhaarID, ReadBy) => {
     // check if the object exists (if not exits return with 404)
     const object = await PHI.Read(AadhaarID);
     if (object.length === 0) {
@@ -33,7 +33,7 @@ module.exports = async (AadhaarID) => {
 
             // fetch all medical records of that location
             // eslint-disable-next-line no-await-in-loop
-            const { MedicalRecords } = await EMR.Read(AadhaarID, LocalID);
+            const { MedicalRecords } = await EMR.Read(AadhaarID, LocalID, ReadBy);
 
             console.log('GOT EMR', MedicalRecords);
 

@@ -1,5 +1,6 @@
 const { EMR, EHR } = require('../../../data');
 const EMRIntegrity = require('../../../data/integrity');
+const EventLogger = require('../../../data/traceability');
 
 module.exports = async (AadhaarID, Record) => {
     // check if the object exists (if not exits create record)
@@ -28,6 +29,9 @@ module.exports = async (AadhaarID, Record) => {
 
     console.log('Recording EMR Integriy.');
     await EMRIntegrity.AddEMR(AadhaarID, process.env.NODE_ID, JSON.stringify(emr));
+
+    console.log('Recording Event Log.');
+    await EventLogger.AddEvent(AadhaarID, 'EMR-Generation', emr.DoctorID, AadhaarID);
 
     // if all goes well, send this LocalID to State Node
     const ehr = await EHR.AddLocal(AadhaarID, process.env.NODE_ID);

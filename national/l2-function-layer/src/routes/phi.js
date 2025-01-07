@@ -19,12 +19,13 @@ router.get('/get/:id', async (req, res) => {
 });
 
 // assemble
-router.get('/assemble/:id', async (req, res) => {
+router.get('/assemble/:id/:by', async (req, res) => {
     // obtain the id of the record to update
     const AadhaarID = req.params.id;
+    const ReadBy = req.params.by;
 
     try {
-        const reply = await Functions.Stateful.PHI.Assemble(AadhaarID);
+        const reply = await Functions.Stateful.PHI.Assemble(AadhaarID, ReadBy);
         if (reply.status === 404) res.status(404).send({ message: 'PHI not found!' });
         else res.status(200).send(reply.data);
     } catch (err) {
