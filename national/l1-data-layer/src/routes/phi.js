@@ -17,9 +17,10 @@ router.post('/create', async (req, res) => {
 
     try {
         const reply = await DB.Create({ AadhaarID: object.AadhaarID }, object, SchemaName);
+        const consent_reply = await DB.Create({ AadhaarID: object.AadhaarID }, { AadhaarID: object.AadhaarID, Consent: {} }, "consent");
 
-        if (reply) {
-            res.status(201).send(reply);
+        if (reply && consent_reply) {
+            res.status(201).send({reply, consent_reply});
         } else {
             throw new Error('Database Error!');
         }
